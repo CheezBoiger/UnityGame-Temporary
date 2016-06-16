@@ -8,7 +8,7 @@ To be Continued...
 # Building This Project
 Be sure you have the following applications installed on your machine:
 - Unity
-- GitHub Desktop
+- GitHub Desktop or Source Tree
   
 You may choose to:
 
