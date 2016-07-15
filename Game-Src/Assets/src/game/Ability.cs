@@ -6,7 +6,14 @@ using System.Text;
 namespace GameProject {
 
 
-public abstract class Ability {
+enum AbilityType {
+  
+}
 
+
+public abstract class Ability {
+  private float damage;
+  private float mod;
+  
 }
 }

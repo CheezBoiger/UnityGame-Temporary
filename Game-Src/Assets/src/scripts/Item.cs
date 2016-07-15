@@ -6,7 +6,7 @@ namespace GameProject {
 /*
  * DamageType is an enum record, allowing the variety of damage types in the game.
  */
-enum DamageType {
+public enum DamageType {
   NORMAL,
   FIRE,
   COLD,

@@ -17,4 +17,4 @@ public abstract class Projectile : Entity {
 	
 	}
 }
-}
+} // GameProject namespace

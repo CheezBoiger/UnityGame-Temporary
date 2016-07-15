@@ -14,6 +14,7 @@ public abstract class ActionObject : Entity {
   public ActionObject() 
     { }
 
+
   public abstract override void Start();
   public abstract override void Update();
 }

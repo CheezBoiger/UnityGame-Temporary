@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
+using System.Collections.Generic;
 
 namespace GameProject {
 
-/* 
- * The condition of our Actor.
- */ 
-enum Condition {
+  /* 
+   * The condition of our Actor.
+   */
+  public enum Condition {
   NOTHING,
   STUNNED,
   POISONED,
@@ -19,6 +20,15 @@ enum Condition {
   CURSED,
   CONFUSED,
 }
+
+
+public class Resistance {
+  public string name;
+  public DamageType DamType;
+  public float resist;
+}
+
+
 /*
  * Actor is the movable object that we interact with, s/he will be controlled by the user,
  * AI, or an NPC.
@@ -50,6 +60,8 @@ public abstract class Actor : ActionObject {
    * Current energy that the actor has.
    */
   private float energy;
+
+  
 
   #endregion
 
@@ -103,5 +115,12 @@ public abstract class Actor : ActionObject {
   public abstract override void Start();
   // Update is called once per frame
   public abstract override void Update();
+
+  public virtual void MergeActors(Actor mergeActor) {
+    
+  }
+
+  public virtual void reflectDamage(List<Actor> actors) {
+  }
 }
 }
