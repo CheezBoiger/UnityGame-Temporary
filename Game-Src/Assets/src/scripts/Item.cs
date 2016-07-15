@@ -28,7 +28,13 @@ public abstract class Item : ActionObject {
   private float damageMod;
   private float itemDamage;
 
-  private List<Spell> spells = new List<Spell>();
+  /*
+   * We should have only one ability per item, since it would be hectic to see too many
+   * abilities on one item.
+   */
+  private Ability distinctAbility;
+
+  private HashSet<Spell> spells = new HashSet<Spell>();
 
   public abstract override void Start();
   public abstract override void Update();

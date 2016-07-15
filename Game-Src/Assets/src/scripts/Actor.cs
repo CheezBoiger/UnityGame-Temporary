@@ -112,13 +112,18 @@ public abstract class Actor : ActionObject {
   }
   #endregion
   
+
   public abstract override void Start();
+
+
   // Update is called once per frame
   public abstract override void Update();
+
 
   public virtual void MergeActors(Actor mergeActor) {
     
   }
+
 
   public virtual void reflectDamage(List<Actor> actors) {
   }
