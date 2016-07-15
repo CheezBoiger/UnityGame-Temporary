@@ -3,12 +3,6 @@
 namespace GameProject {
 
 
-public enum SpellType {
-  ACTIVE,
-  PASSIVE,
-}
-
-
 public enum EffectOnType {
   ALLIES,
   ENEMIES,
@@ -18,20 +12,10 @@ public enum EffectOnType {
 
 public abstract class SpellEffect {
   private bool isBuff;
-  private SpellType spellKind;
   private string description;
   private DamageType damType;
   private float radius;
   private EffectOnType effectOn;
-
- 
-  public SpellType SpellKind {
-    get {
-      return spellKind;
-    } set {
-      spellKind = SpellKind;
-    }
-  }
 
   
   public bool IsBuff {

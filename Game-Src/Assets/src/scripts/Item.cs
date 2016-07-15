@@ -33,7 +33,9 @@ public abstract class Item : ActionObject {
    * abilities on one item.
    */
   private Ability distinctAbility;
-
+  /*
+   * Certain spells give certain buffs, debuffs, and 
+   */
   private HashSet<Spell> spells = new HashSet<Spell>();
 
   public abstract override void Start();
