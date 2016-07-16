@@ -140,11 +140,11 @@ public abstract class Actor : ActionObject {
   /*
    * Inject any SpellEffect objects that collided with the Actor.
    */
-  public virtual void injectSpellEffects(HashSet<SpellEffect> effects) {
+  public virtual void InjectSpellEffects(HashSet<SpellEffect> effects) {
   }
 
 
-  public virtual void reflectDamage(List<Actor> actors) {
+  public virtual void ReflectDamage(List<Actor> actors) {
   }
 }
 }

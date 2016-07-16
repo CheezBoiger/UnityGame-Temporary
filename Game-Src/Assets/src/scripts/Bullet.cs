@@ -5,7 +5,7 @@ using System;
 namespace GameProject {
 
 
-public class Bullet : Projectile {
+public sealed class Bullet : Projectile {
   public override void Start() {
   
   }
