@@ -22,6 +22,7 @@ namespace GameProject {
   WEAKENED,
   STRENGTHENED,
   SCARED,
+  INVULNERABLE,
 }
 
 

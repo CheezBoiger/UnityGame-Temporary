@@ -22,6 +22,7 @@ enum AbilityType {
   WEAKEN,
   MORPH,
   SUMMON,
+  INVULNERABILITY,
 }
 
 
