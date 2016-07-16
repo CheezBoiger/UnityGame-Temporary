@@ -29,7 +29,8 @@ public enum ItemType {
  * that will be implemented into the gameplay.
  */
 public abstract class Item : ActionObject {
-  
+  private ItemType typeOfItem;  
+
   private float healthMod;
   private float energyMod;
   private float movementSpeedMod;
