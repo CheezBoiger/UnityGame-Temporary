@@ -14,6 +14,14 @@ public enum DamageType {
   POSION,
 }
 
+public enum ItemType {
+  MELEE,
+  RANGED,
+  POTION,
+  ARMOR,
+  
+}
+
 /*
  * Main Item abstract class is intended to group our items as one. They contain spells (if
  * specified), damage, a name, health modifications, energy modifications, movement modificiations,

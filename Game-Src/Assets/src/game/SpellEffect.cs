@@ -3,21 +3,30 @@
 namespace GameProject {
 
 
-public enum EffectOnType {
+public enum AffectOnType {
   ALLIES,
   ENEMIES,
   OBJECTS,
 }
 
-
+/*
+ * SpellEffect allows descriptions about the effects that are contained in a Spell
+ * object. SpellEffect Desribes the damage, type, range, spread, AoE, and who it 
+ * affects, adding de/buffs to actors and items, or anthing really.
+ */ 
 public abstract class SpellEffect {
   private bool isBuff;
   private string description;
-  private DamageType damType;
   private float radius;
-  private EffectOnType effectOn;
+  private float spread;
+  private float areaOfEffect;
 
+  private int projectiles;
+
+  private AffectOnType affectOn;
+  private DamageType damType;
   
+
   public bool IsBuff {
     get {
       return isBuff;

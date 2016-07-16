@@ -10,12 +10,15 @@ public enum SpellType {
 }
 
 
-public abstract class Spell {
+public abstract class Spell : Entity {
   private string spellName;
   private float damage;
   private float damageMod;
   private SpellType spellKind;
   
+  private List<SpellEffect> buffs;
+  private List<SpellEffect> debuffs;
+
 
   public SpellType SpellKind {
     get {
@@ -24,8 +27,5 @@ public abstract class Spell {
       spellKind = SpellKind;
     }
   }
-
-  private List<SpellEffect> buffs;
-  private List<SpellEffect> debuffs;
-  }
+}
 }

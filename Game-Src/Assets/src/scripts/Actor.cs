@@ -19,6 +19,9 @@ namespace GameProject {
   INFECTED,
   CURSED,
   CONFUSED,
+  WEAKENED,
+  STRENGTHENED,
+  SCARED,
 }
 
 
