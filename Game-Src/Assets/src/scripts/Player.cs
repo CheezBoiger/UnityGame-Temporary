@@ -10,14 +10,18 @@ namespace GameProject {
  * Player test, only for experimenting, not Official.
  */
 public sealed class Player : Actor {
-
+  
   public override void Start() {
+    MovementRate = 10;
   }
 
 
   // Update is called once per frame
   public override void Update () {
-    //Debug.Log(this.gameObject.name);
+    Debug.Log("Object is moving!");
+    Vector3 pos = this.transform.position;
+    pos.x -= 0.05f;
+    transform.position = pos;
   }
 
 

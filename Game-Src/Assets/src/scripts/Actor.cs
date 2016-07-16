@@ -123,6 +123,14 @@ public abstract class Actor : ActionObject {
       energy = Energy;
     }
   }
+
+  public float MovementRate {
+    get {
+      return movementRate;
+    } set {
+      movementRate = MovementRate;
+    }
+  }
   #endregion
   
 
