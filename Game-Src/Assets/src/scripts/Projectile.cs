@@ -8,7 +8,8 @@ namespace GameProject {
 /*
  * Projectile is an Entity that acts as the default object that is in mid air, prior to being shot by
  * something. It will serve as a container, which will hold spell effects, and transfer them to something,
- * such as a wall, NPC, an Enemy, or the Player and his allies.
+ * such as a wall, NPC, an Enemy, or the Player and his allies. The Mathematics, as well as the Physics, can
+ * be overridable by child classes, simply because we may need a derived class to do something special.
  */
 public abstract class Projectile : Entity {
   /*
@@ -45,6 +46,8 @@ public abstract class Projectile : Entity {
     Actor actor = coll.gameObject.GetComponent<Actor>();
     
     if (actor != null) {
+      // A simple test on changing the angle of our projectile by rotating it. In 2D you would use forward from vector3D.
+      transform.rotation = Quaternion.AngleAxis(-45, Vector3.forward);
       Debug.Log("I hit an actor!!");
     } else {
       Debug.Log("Unkown object hit me.");
