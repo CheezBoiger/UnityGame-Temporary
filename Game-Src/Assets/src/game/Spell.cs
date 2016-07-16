@@ -12,8 +12,14 @@ public enum SpellType {
 
 public abstract class Spell : Entity {
   private string spellName;
+
+  private bool hasCooldown;
+
   private float damage;
   private float damageMod;
+
+  private int coolDownTimer;
+
   private SpellType spellKind;
   
   private List<SpellEffect> buffs;

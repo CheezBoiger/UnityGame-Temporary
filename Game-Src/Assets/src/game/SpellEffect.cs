@@ -16,12 +16,16 @@ public enum AffectOnType {
  */ 
 public abstract class SpellEffect {
   private bool isBuff;
+  private bool hasTimer;
+
   private string description;
+
   private float radius;
   private float spread;
   private float areaOfEffect;
 
   private int projectiles;
+  private int timer;
 
   private AffectOnType affectOn;
   private DamageType damType;
