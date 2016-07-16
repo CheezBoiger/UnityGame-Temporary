@@ -64,6 +64,15 @@ public abstract class Actor : ActionObject {
    */
   private float energy;
 
+  /*
+   * Current buffs on the actor, which will affect his/her gameplay.
+   */
+  private HashSet<SpellEffect> currentBuffs;
+  /*
+   * Current debuffs on the actor, which will cause trouble on their gameplay.
+   */
+  private HashSet<SpellEffect> currentDebuffs;
+
   
 
   #endregion
@@ -125,6 +134,12 @@ public abstract class Actor : ActionObject {
 
   public virtual void MergeActors(Actor mergeActor) {
     
+  }
+
+  /*
+   * Inject any SpellEffect objects that collided with the Actor.
+   */
+  public virtual void injectSpellEffects(HashSet<SpellEffect> effects) {
   }
 
 
