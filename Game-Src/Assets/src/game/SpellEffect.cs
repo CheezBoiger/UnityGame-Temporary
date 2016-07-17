@@ -1,60 +1,58 @@
 ﻿using System.Collections;
 
 namespace GameProject {
+	public enum AffectOnType {
+	  ALLIES,
+	  ENEMIES,
+	  OBJECTS,
+	}
 
+	/// <summary>
+	/// SpellEffect allows descriptions about the effects that are contained in a Spell
+	/// object. SpellEffect Desribes the damage, type, range, spread, AoE, and who it 
+	/// affects, adding de/buffs to actors and items, or anthing really. 
+	/// </summary>
+	public abstract class SpellEffect {
+	  private bool isBuff;
+	  private bool hasTimer;
 
-public enum AffectOnType {
-  ALLIES,
-  ENEMIES,
-  OBJECTS,
-}
+	  private string description;
 
-/*
- * SpellEffect allows descriptions about the effects that are contained in a Spell
- * object. SpellEffect Desribes the damage, type, range, spread, AoE, and who it 
- * affects, adding de/buffs to actors and items, or anthing really.
- */ 
-public abstract class SpellEffect {
-  private bool isBuff;
-  private bool hasTimer;
+	  private float radius;
+	  private float spread;
+	  private float areaOfEffect;
 
-  private string description;
+	  private int projectiles;
+	  private int timer;
 
-  private float radius;
-  private float spread;
-  private float areaOfEffect;
+	  private AffectOnType affectOn;
+	  private DamageType damType;
+	  
 
-  private int projectiles;
-  private int timer;
+	  public bool IsBuff {
+	    get {
+	      return isBuff;
+	    } set {
+	      isBuff = IsBuff;
+	    }
+	  }
 
-  private AffectOnType affectOn;
-  private DamageType damType;
-  
+	  
+	  public string Description {
+	    get {
+	      return description;
+	    } set {
+	      description = Description;
+	    }
+	  }
 
-  public bool IsBuff {
-    get {
-      return isBuff;
-    } set {
-      isBuff = IsBuff;
-    }
-  }
-
-  
-  public string Description {
-    get {
-      return description;
-    } set {
-      description = Description;
-    }
-  }
-
-  
-  public DamageType DamType {
-    get {
-      return damType;
-    } set {
-      damType = DamType;
-    }
-  }
-}
+	  
+	  public DamageType DamType {
+	    get {
+	      return damType;
+	    } set {
+	      damType = DamType;
+	    }
+	  }
+	}
 }

@@ -4,14 +4,13 @@ using System;
 
 namespace GameProject {
 
+	public sealed class Bullet : Projectile {
+		public override void Start() {
 
-public sealed class Bullet : Projectile {
-  public override void Start() {
-  
-  }
+		}
 
-  public override void Update() {
-    
-  }
-}
+		public override void Update() {
+
+		}
+	}
 }
