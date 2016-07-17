@@ -35,7 +35,7 @@ namespace GameProject {
 			Actor enemy = coll.gameObject.GetComponent<Actor>();
 			Debug.Log("I am collided!!");
 			if (coll.gameObject.tag.CompareTo("Enemy") == 0) {
-			  Debug.Log("Enemy is touching me!!");
+				Debug.Log("Enemy is touching me!!");
 			}
 		}
 	}

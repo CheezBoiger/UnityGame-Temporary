@@ -9,27 +9,27 @@ namespace GameProject {
 	}
 
 	public abstract class Spell : Entity {
-	  private string spellName;
+		private string spellName;
 
-	  private bool hasCooldown;
+		private bool hasCooldown;
 
-	  private float damage;
-	  private float damageMod;
+		private float damage;
+		private float damageMod;
 
-	  private int coolDownTimer;
+		private int coolDownTimer;
 
-	  private SpellType spellKind;
+		private SpellType spellKind;
 	  
-	  private List<SpellEffect> buffs;
-	  private List<SpellEffect> debuffs;
+		private List<SpellEffect> buffs;
+		private List<SpellEffect> debuffs;
 
 
-	  public SpellType SpellKind {
-	    get {
-	      return spellKind;
-	    } set {
-	      spellKind = SpellKind;
-	    }
-	  }
+		public SpellType SpellKind {
+			get {
+				return spellKind;
+			} set {
+				spellKind = SpellKind;
+			}
+		}
 	}
 }

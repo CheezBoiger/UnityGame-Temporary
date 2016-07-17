@@ -25,9 +25,9 @@ namespace GameProject {
 	}
 
 	public class Resistance {
-	  public string name;
-	  public DamageType DamType;
-	  public float resist;
+		public string name;
+		public DamageType DamType;
+		public float resist;
 	}
 
 
@@ -80,55 +80,55 @@ namespace GameProject {
 		#region Getters and Setters
 
 		public float MaxEnergy {
-		get {
-		  return maxEnergy;
-		} set {
-		  maxEnergy = MaxEnergy;
-		}
+			get {
+				return maxEnergy;
+			} set {
+				maxEnergy = MaxEnergy;
+			}
 		}
 
 
 		public float BaseHealth {
-		get { 
-		  return baseHealth;
-		} set {
-		  baseHealth = BaseHealth;
-		}
+			get { 
+				return baseHealth;
+			} set {
+				baseHealth = BaseHealth;
+			}
 		}
 
 
 		public float MaxHealth {
-		get { 
-		  return maxHealth;
-		} set {
-		  maxHealth = MaxHealth;
-		} 
+			get { 
+				return maxHealth;
+			} set {
+				maxHealth = MaxHealth;
+			} 
 		}
 
 
 		public float Health {
-		get {
-		  return health;
-		} set {
-		  health = Health;
-		}
+			get {
+				return health;
+			} set {
+				health = Health;
+			}
 		}
 
 
 		public float Energy {
-		get {
-		  return energy;
-		} set {
-		  energy = Energy;
-		}
+			get {
+				return energy;
+			} set {
+				energy = Energy;
+			}
 		}
 
 		public float MovementRate {
-		get {
-		  return movementRate;
-		} set {
-		  movementRate = MovementRate;
-		}
+			get {
+				return movementRate;
+			} set {
+				movementRate = MovementRate;
+			}
 		}
 		#endregion
 

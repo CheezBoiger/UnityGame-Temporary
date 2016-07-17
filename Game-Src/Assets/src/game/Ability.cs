@@ -9,18 +9,18 @@ namespace GameProject {
 	/// morphing ability, allowing you to turn into a wild beast to wreck havoc on your foes.
 	/// </summary>
 	enum AbilityType {
-	  NOTHING,
-	  FLY,
-	  DEGRADE,
-	  HEAL,
-	  CONJURE,
-	  LIQUIFY,
-	  SOLIDIFY,
-	  STRENGTHEN,
-	  WEAKEN,
-	  MORPH,
-	  SUMMON,
-	  INVULNERABILITY,
+		NOTHING,
+		FLY,
+		DEGRADE,
+		HEAL,
+		CONJURE,
+		LIQUIFY,
+		SOLIDIFY,
+		STRENGTHEN,
+		WEAKEN,
+		MORPH,
+		SUMMON,
+		INVULNERABILITY,
 	}
 
 
@@ -29,7 +29,7 @@ namespace GameProject {
 	/// will be given special actions so as to make the game much more unique in terms of the behaviour of our Actors.
 	/// </summary>
 	public abstract class Ability {
-	  private float damage;
-	  private float mod;
+		private float damage;
+		private float mod;
 	}
 }

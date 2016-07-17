@@ -46,11 +46,11 @@ namespace GameProject {
 			Actor actor = coll.gameObject.GetComponent<Actor>();
 
 			if (actor != null) {
-			  // A simple test on changing the angle of our projectile by rotating it. In 2D you would use forward from vector3D.
-			  transform.rotation = Quaternion.AngleAxis(-45, Vector3.forward);
-			  Debug.Log("I hit an actor!!");
+				// A simple test on changing the angle of our projectile by rotating it. In 2D you would use forward from vector3D.
+				transform.rotation = Quaternion.AngleAxis(-45, Vector3.forward);
+				Debug.Log("I hit an actor!!");
 			} else {
-			  Debug.Log("Unkown object hit me.");
+				Debug.Log("Unkown object hit me.");
 			}
 		} 
 	}

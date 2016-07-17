@@ -2,9 +2,9 @@
 
 namespace GameProject {
 	public enum AffectOnType {
-	  ALLIES,
-	  ENEMIES,
-	  OBJECTS,
+		ALLIES,
+		ENEMIES,
+		OBJECTS,
 	}
 
 	/// <summary>
@@ -13,46 +13,46 @@ namespace GameProject {
 	/// affects, adding de/buffs to actors and items, or anthing really. 
 	/// </summary>
 	public abstract class SpellEffect {
-	  private bool isBuff;
-	  private bool hasTimer;
+		private bool isBuff;
+		private bool hasTimer;
 
-	  private string description;
+		private string description;
 
-	  private float radius;
-	  private float spread;
-	  private float areaOfEffect;
+		private float radius;
+		private float spread;
+		private float areaOfEffect;
 
-	  private int projectiles;
-	  private int timer;
+		private int projectiles;
+		private int timer;
 
-	  private AffectOnType affectOn;
-	  private DamageType damType;
+		private AffectOnType affectOn;
+		private DamageType damType;
 	  
 
-	  public bool IsBuff {
-	    get {
-	      return isBuff;
-	    } set {
-	      isBuff = IsBuff;
-	    }
-	  }
+		public bool IsBuff {
+			get {
+				return isBuff;
+			} set {
+				isBuff = IsBuff;
+			}
+		}
 
 	  
-	  public string Description {
-	    get {
-	      return description;
-	    } set {
-	      description = Description;
-	    }
-	  }
+		public string Description {
+			get {
+				return description;
+			} set {
+				description = Description;
+			}
+		}
 
 	  
-	  public DamageType DamType {
-	    get {
-	      return damType;
-	    } set {
-	      damType = DamType;
-	    }
-	  }
+		public DamageType DamType {
+			get {
+				return damType;
+			} set {
+				damType = DamType;
+			}
+		}
 	}
 }
