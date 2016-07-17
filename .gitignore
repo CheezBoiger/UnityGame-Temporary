@@ -2,10 +2,11 @@
 *.meta
 
 # Remove junk data on folders.
-Game-Src/ProjectSettings/
-Game-Src/Library/
-
+Game-Src/ProjectSettings
+Game-Src/Library
+Game-Src/Temp
 
 # Any Visual Studio Settings must be ignored.
 Game-Src/.vs
 *.sln
+*.csproj
