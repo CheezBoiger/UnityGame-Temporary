@@ -1,0 +1,11 @@
+# Ignore junk files.
+*.meta
+
+# Remove junk data on folders.
+Game-Src/ProjectSettings/
+Game-Src/Library/
+
+
+# Any Visual Studio Settings must be ignored.
+Game-Src/.vs
+*.sln
