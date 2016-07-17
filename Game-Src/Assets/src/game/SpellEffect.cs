@@ -13,11 +13,12 @@ namespace GameProject {
 	/// affects, adding de/buffs to actors and items, or anthing really. 
 	/// </summary>
 	public abstract class SpellEffect {
+
 		private bool isBuff;
 		private bool hasTimer;
 
 		private string description;
-
+			
 		private float radius;
 		private float spread;
 		private float areaOfEffect;
