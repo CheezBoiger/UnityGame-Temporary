@@ -3,8 +3,6 @@
 
 # Remove junk data on folders.
 Game-Src/ProjectSettings
-Game-Src/Library
-Game-Src/Library/metadata
 Game-Src/Temp
 
 # Any Visual Studio Settings must be ignored.
