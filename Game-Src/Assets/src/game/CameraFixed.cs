@@ -33,7 +33,7 @@ namespace GameProject {
 		void Start() { 
 			// Calculate the x, y, and z position from the Transform we are following.
 			xPos = distance * 0.70710678f;
-			zPos = distance * 0.70710678f;
+			zPos = xPos;
 			yPos = distance * 0.57735f;
 		}
 
