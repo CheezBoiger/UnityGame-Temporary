@@ -8,11 +8,15 @@ namespace GameProject {
 	/// All things involved in breakable objects (such as crates, walls, bushes, vases, etc)
 	/// should be associated with Breakable. Attributes are still in the works.
 	/// </summary>
-	public abstract class Breakable : Entity {
+	public class Breakable : Entity {
 
 		/// Use this for initialization
-		public abstract override void Start();
+		public override void Start() {
+
+		}
 		/// Update is called once per frame
-		public abstract override void Update();
+		public override void Update() {
+
+		}
 	}
 }

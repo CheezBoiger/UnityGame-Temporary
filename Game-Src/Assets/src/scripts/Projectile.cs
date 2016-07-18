@@ -10,7 +10,7 @@ namespace GameProject {
 	/// such as a wall, NPC, an Enemy, or the Player and his allies. The Mathematics, as well as the Physics, can
 	/// be overridable by child classes, simply because we may need a derived class to do something special.
 	/// </summary>
-	public abstract class Projectile : Entity {
+	public abstract class Projectile : ActionObject {
 		/// <summary>
 		/// current position of the projectile.
 		/// </summary>
