@@ -7,7 +7,9 @@ namespace GameProject {
 	  ACTIVE,
 	  PASSIVE,
 	}
-
+	/// <summary>
+	/// Spell is an abstract class, bred to simply 
+	/// </summary>
 	public abstract class Spell : Entity {
 		private string spellName;
 
