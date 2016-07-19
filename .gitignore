@@ -2,9 +2,8 @@
 *.meta
 
 # Remove junk data on folders.
-Game-Src/ProjectSettings
-Game-Src/Temp
-Game-Src/Library
+Game-Src/[Tt]emp/
+Game-Src/[Ll]ibrary/
 
 # Any Visual Studio/ MonoDevelop Settings must be ignored.
 Game-Src/.vs

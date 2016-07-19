@@ -8,12 +8,16 @@ namespace GameProject {
 	/// jump out of the map, and other materials that should not be destroyed during 
 	/// gameplay, by ActiveObjects.
 	/// </summary>
-	public abstract class Unbreakable : Entity {
+	public class Unbreakable : Entity {
 
 		// Use this for initialization
-		public abstract override void Start();
+		public override void Start() {
+
+		}
 	
 		// Update is called once per frame
-		public abstract override void Update();
+		public override void Update() {
+
+		}
 	}
 }
