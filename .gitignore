@@ -20,3 +20,5 @@ Game-Src/.vs
 *.app
 *.exe
 *.*_data
+Library/
+.gitignore.gitignore

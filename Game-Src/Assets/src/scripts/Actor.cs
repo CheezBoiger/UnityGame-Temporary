@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using GameProject.Resources;
 
 namespace GameProject {
 	/// <summary>
@@ -73,7 +74,10 @@ namespace GameProject {
 		/// </summary>
 		private HashSet<SpellEffect> currentDebuffs;
 
-
+		/// <summary>
+		/// The item the actor is stepping on.
+		/// </summary>
+		private GameObject walkedOverItem;
 
 		#endregion
 
@@ -87,7 +91,6 @@ namespace GameProject {
 			}
 		}
 
-
 		public float BaseHealth {
 			get { 
 				return baseHealth;
@@ -95,7 +98,6 @@ namespace GameProject {
 				baseHealth = BaseHealth;
 			}
 		}
-
 
 		public float MaxHealth {
 			get { 
@@ -105,7 +107,6 @@ namespace GameProject {
 			} 
 		}
 
-
 		public float Health {
 			get {
 				return health;
@@ -113,7 +114,6 @@ namespace GameProject {
 				health = Health;
 			}
 		}
-
 
 		public float Energy {
 			get {
@@ -130,6 +130,15 @@ namespace GameProject {
 				movementRate = MovementRate;
 			}
 		}
+
+		public Item WalkedOverItem {
+			get {
+				return walkedOverItem;
+			} set {
+				walkedOverItem = value;
+			}
+		}
+
 		#endregion
 
 
@@ -150,8 +159,29 @@ namespace GameProject {
 		public virtual void InjectSpellEffects(HashSet<SpellEffect> effects) {
 		}
 
-
 		public virtual void ReflectDamage(List<Actor> actors) {
+		}
+
+		/// <summary>
+		/// Event gets trigged when the actor collides with a collectible item on the map
+		/// This will store the item into the WalkedOverItem object.
+		/// </summary>
+		/// <param name="other">The item on the map</param>
+		public void OnTriggerEnter(Collider other) {
+			if (other.gameObject.CompareTag(GameTags.Item)) {
+				walkedOverItem = other.gameObject;
+			}
+		}
+
+		/// <summary>
+		/// Event gets trigged when the actor leaves the area that has a collectible item on the map
+		/// This will assign null to the WalkedOverItem object.
+		/// </summary>
+		/// <param name="other">The item on the map</param>
+		public void OnTriggerExit(Collider other) {
+			if (other.gameObject.CompareTag(GameTags.Item)) {
+				walkedOverItem = null;
+			}
 		}
 	}
 }
