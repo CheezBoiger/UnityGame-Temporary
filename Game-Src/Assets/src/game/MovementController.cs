@@ -9,10 +9,16 @@ namespace GameProject {
 	/// </summary>
 	public class MovementController : MonoBehaviour {
 		public float movementRate = 0.05f;
-
+		/// <summary>
+		/// The rate of which the movement at a certain direction.
+		/// </summary>
 		private Vector3 moveVector;
-		private Vector3 directionVector;
+		/// <summary>
+		/// The direction from which the target transform is facing. This is the forward facing vector.
+		/// </summary>
+		private Vector3 lookVector;
 
+		#region Getters and Setters
 		public float MovementRate {
 			get {
 				return MovementRate;
@@ -20,50 +26,50 @@ namespace GameProject {
 				movementRate = value;
 			}
 		}
-
+		#endregion
 		// Use this for initialization
 		void Start() {
 			
 		}
 
 		/// <summary>
-		/// Rotates the Target GameObject to the direction of travel.
+		/// Rotates the Target GameObject to the direction of travel, relying on normalization, along with moving the Target
+		/// in several places by the moveVector.
 		/// </summary>
 		// Update is called once per frame
 		void Update() {
-
-			directionVector = transform.forward;
+			lookVector = transform.forward;
 			moveVector = this.transform.position;
 
 			Debug.Log("Object is moving!");		
 
 			if(Input.GetKey(KeyCode.W)) {
-				directionVector.x += 1.0f;
-				directionVector.z += 1.0f;
+				lookVector.x += 1.0f;
+				lookVector.z += 1.0f;
 
 				moveVector.z += movementRate;
 				moveVector.x += movementRate;
 			}
 			
 			if(Input.GetKey(KeyCode.S)) {
-				directionVector.x -= 1.0f;
-				directionVector.z -= 1.0f;
+				lookVector.x -= 1.0f;
+				lookVector.z -= 1.0f;
 
 				moveVector.z -= movementRate;
 				moveVector.x -= movementRate;
 			}
 
 			if(Input.GetKey(KeyCode.A)) {
-				directionVector.x -= 1.0f;
-				directionVector.z += 1.0f;
+				lookVector.x -= 1.0f;
+				lookVector.z += 1.0f;
 
 				moveVector.x -= movementRate;
 				moveVector.z += movementRate;
 			}
 
 			if(Input.GetKey(KeyCode.D)) {
-				directionVector.x += 1.0f;
-				directionVector.z -= 1.0f;
+				lookVector.x += 1.0f;
+				lookVector.z -= 1.0f;
 
 				moveVector.x += movementRate;
 				moveVector.z -= movementRate;
@@ -71,7 +77,7 @@ namespace GameProject {
 
 			transform.position = moveVector;
 
-			Quaternion targetRotation = Quaternion.LookRotation(directionVector);
+			Quaternion targetRotation = Quaternion.LookRotation(lookVector);
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 15.0f);
 		}
 	}
