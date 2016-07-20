@@ -11,7 +11,7 @@ namespace GameProject {
 		public float movementRate = 0.05f;
 		public float turnRate = 15.0f;
 		/// <summary>
-		/// The rate of which the movement at a certain direction.
+		/// The position of the movement at a certain direction.
 		/// </summary>
 		private Vector3 moveVector;
 		/// <summary>
@@ -34,13 +34,15 @@ namespace GameProject {
 		}
 
 		/// <summary>
-		/// Rotates the Target GameObject to the direction of travel, relying on normalization, along with moving the Target
-		/// in several places by the moveVector.
+		/// Rotates the Target GameObject to the direction of travel, relying on normalization, along with moving 
+		/// the Target in several places by the moveVector.
 		/// </summary>
 		// Update is called once per frame
 		void Update() {
 			lookVector = transform.forward;
 			moveVector = this.transform.position;
+			// Normalize the look vector, otherwise we will be increasing the position of it!
+			lookVector.Normalize();
 
 			Debug.Log("Object is moving!");		
 

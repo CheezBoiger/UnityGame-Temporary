@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 375562771}
-  distance: 10
+  distance: 20
 --- !u!1 &1416343722
 GameObject:
   m_ObjectHideFlags: 0
