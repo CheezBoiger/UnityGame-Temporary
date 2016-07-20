@@ -31,21 +31,25 @@ namespace GameProject {
 			Debug.Log("Object is moving!");		
 
 			if(Input.GetKey(KeyCode.W)) {
+				transform.forward = new Vector3(1f, 0f, 1f);
 				moveVector.z += movementRate;
 				moveVector.x += movementRate;
 			}
 			
 			if(Input.GetKey(KeyCode.S)) {
+				transform.forward = new Vector3(-1f, 0f, -1f);
 				moveVector.z -= movementRate;
 				moveVector.x -= movementRate;
 			}
 
 			if(Input.GetKey(KeyCode.A)) {
+				transform.forward = new Vector3(-1f, 0, 1f);
 				moveVector.x -= movementRate;
 				moveVector.z += movementRate;
 			}
 
 			if(Input.GetKey(KeyCode.D)) {
+				transform.forward = new Vector3(1f, 0, -1f);
 				moveVector.x += movementRate;
 				moveVector.z -= movementRate;
 			}
