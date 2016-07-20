@@ -41,8 +41,6 @@ namespace GameProject {
 		void Update() {
 			lookVector = transform.forward;
 			moveVector = this.transform.position;
-			// Normalize the look vector, otherwise we will be increasing the position of it!
-			lookVector.Normalize();
 
 			Debug.Log("Object is moving!");		
 
@@ -82,6 +80,8 @@ namespace GameProject {
 
 			Quaternion targetRotation = Quaternion.LookRotation(lookVector);
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnRate);
+
+			//Debug.LogFormat("Forward Vector x: {0} y: {0} z: {0}", lookVector.x, lookVector.y, lookVector.z);
 		}
 	}
 }
