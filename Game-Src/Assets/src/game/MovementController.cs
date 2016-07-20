@@ -9,6 +9,7 @@ namespace GameProject {
 	/// </summary>
 	public class MovementController : MonoBehaviour {
 		public float movementRate = 0.05f;
+		public float turnRate = 15.0f;
 		/// <summary>
 		/// The rate of which the movement at a certain direction.
 		/// </summary>
@@ -78,7 +79,7 @@ namespace GameProject {
 			transform.position = moveVector;
 
 			Quaternion targetRotation = Quaternion.LookRotation(lookVector);
-			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 15.0f);
+			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnRate);
 		}
 	}
 }
