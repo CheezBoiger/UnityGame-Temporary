@@ -11,6 +11,7 @@ namespace GameProject {
 		public float movementRate = 0.05f;
 
 		private Vector3 moveVector;
+		private Vector3 directionVector;
 
 		public float MovementRate {
 			get {
@@ -25,36 +26,53 @@ namespace GameProject {
 			
 		}
 
+		/// <summary>
+		/// Rotates the Target GameObject to the direction of travel.
+		/// </summary>
 		// Update is called once per frame
 		void Update() {
+
+			directionVector = transform.forward;
 			moveVector = this.transform.position;
+
 			Debug.Log("Object is moving!");		
 
 			if(Input.GetKey(KeyCode.W)) {
-				transform.forward = new Vector3(1f, 0f, 1f);
+				directionVector.x += 1.0f;
+				directionVector.z += 1.0f;
+
 				moveVector.z += movementRate;
 				moveVector.x += movementRate;
 			}
 			
 			if(Input.GetKey(KeyCode.S)) {
-				transform.forward = new Vector3(-1f, 0f, -1f);
+				directionVector.x -= 1.0f;
+				directionVector.z -= 1.0f;
+
 				moveVector.z -= movementRate;
 				moveVector.x -= movementRate;
 			}
 
 			if(Input.GetKey(KeyCode.A)) {
-				transform.forward = new Vector3(-1f, 0, 1f);
+				directionVector.x -= 1.0f;
+				directionVector.z += 1.0f;
+
 				moveVector.x -= movementRate;
 				moveVector.z += movementRate;
 			}
 
 			if(Input.GetKey(KeyCode.D)) {
-				transform.forward = new Vector3(1f, 0, -1f);
+				directionVector.x += 1.0f;
+				directionVector.z -= 1.0f;
+
 				moveVector.x += movementRate;
 				moveVector.z -= movementRate;
 			}
 
 			transform.position = moveVector;
+
+			Quaternion targetRotation = Quaternion.LookRotation(directionVector);
+			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 15.0f);
 		}
 	}
 }
