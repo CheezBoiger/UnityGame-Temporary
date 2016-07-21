@@ -26,6 +26,17 @@ namespace GameProject {
 					// TODO: Equipt the item to the player
 				}
 			}
+
+			// Listen to key press to throw item
+			if (Input.GetKeyDown(KeyCode.Space)) {
+				// TODO: Get the item form the bag
+				var item = new GameObject();
+				var thrownItem = Instantiate(item, transform.position, Quaternion.identity) as Transform;
+	
+				thrownItem.name = item.name;
+				thrownItem.Translate(0, 0, 2f);
+				// Delete the item from the bag
+			}
 		}
 
 		public void OnApplicationFocus( bool focusStatus ) {
