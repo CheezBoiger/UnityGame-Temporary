@@ -35,7 +35,6 @@ namespace GameProject {
 	  private float movementSpeedMod;
 	  private float damageMod;
 	  private float itemDamage;
-
 	  /*
 	   * We should have only one ability per item, since it would be hectic to see too many
 	   * abilities on one item.

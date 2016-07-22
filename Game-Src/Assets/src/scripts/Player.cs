@@ -16,13 +16,11 @@ namespace GameProject {
 		public override void Update () {
 			Debug.Log("Object is moving!");
 			Vector3 pos = this.transform.position;
-			pos.x -= 0.05f;
-			transform.position = pos;
 
 			// Listen to key press to pick up item
 			if (Input.GetKeyDown(KeyCode.E)) {
 				if (WalkedOverItem) {
-					Destroy(WalkedOverItem);
+					Destroy(WalkedOverItem.gameObject);
 					// TODO: Equipt the item to the player
 				}
 			}

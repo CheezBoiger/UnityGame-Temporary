@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using GameProject.Resources;
 
 namespace GameProject {
 	/// <summary>
@@ -77,7 +76,7 @@ namespace GameProject {
 		/// <summary>
 		/// The item the actor is stepping on.
 		/// </summary>
-		private GameObject walkedOverItem;
+		private Item walkedOverItem;
 
 		#endregion
 
@@ -168,8 +167,22 @@ namespace GameProject {
 		/// </summary>
 		/// <param name="other">The item on the map</param>
 		public void OnTriggerEnter(Collider other) {
-			if (other.gameObject.CompareTag(GameTags.Item)) {
-				walkedOverItem = other.gameObject;
+			Debug.Log("I am triggered!!");
+			Item result = other.GetComponent<Item>();
+			if(result != null) {
+				walkedOverItem = other.GetComponent<Item>();
+			}
+		}
+
+		/// <summary>
+		/// Intentionally updates to ensure that the 
+		/// </summary>
+		/// <param name="other"></param>
+		public void OnTriggerStay(Collider other) {
+			Debug.Log("I'm still triggered!");
+			Item result = other.GetComponent<Item>();
+			if(result != null) {
+				walkedOverItem = other.GetComponent<Item>();
 			}
 		}
 
@@ -179,7 +192,8 @@ namespace GameProject {
 		/// </summary>
 		/// <param name="other">The item on the map</param>
 		public void OnTriggerExit(Collider other) {
-			if (other.gameObject.CompareTag(GameTags.Item)) {
+			Item result = other.GetComponent<Item>();
+			if (result != null) {
 				walkedOverItem = null;
 			}
 		}
