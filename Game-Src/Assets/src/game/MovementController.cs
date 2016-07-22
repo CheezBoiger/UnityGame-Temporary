@@ -9,7 +9,15 @@ namespace GameProject {
 	/// </summary>
 	public class MovementController : MonoBehaviour {
 		public float movementRate = 0.05f;
+		public float sprintRate = 0.1f;
+
 		public float turnRate = 15.0f;
+		public float sprintTurnRate = 12f;
+
+		private float maxSprintRate;
+		private float maxMovementRate;
+		private float maxTurnRate;
+		private float maxSprintRotationRate;
 		/// <summary>
 		/// The position of the movement at a certain direction.
 		/// </summary>
@@ -30,7 +38,10 @@ namespace GameProject {
 		#endregion
 		// Use this for initialization
 		void Start() {
-			
+			maxMovementRate = movementRate;
+			maxSprintRate = sprintRate;
+			maxTurnRate = turnRate;
+			maxSprintRotationRate = sprintTurnRate;
 		}
 
 		/// <summary>
@@ -39,41 +50,49 @@ namespace GameProject {
 		/// </summary>
 		// Update is called once per frame
 		void Update() {
+			float rotationRate = turnRate;
+			float moveRate = movementRate;
 			lookVector = transform.forward;
 			moveVector = this.transform.position;
 
-			Debug.Log("Object is moving!");		
+			Debug.Log("Object is moving!");
+
+			if(Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift)) {
+				Debug.Log("Sprinting!");
+				rotationRate += sprintTurnRate;
+				moveRate += sprintRate;
+			}
 
 			if(Input.GetKey(KeyCode.W)) {
 				lookVector.x += 1.0f;
 				lookVector.z += 1.0f;
 
-				moveVector.z += movementRate;
-				moveVector.x += movementRate;
+				moveVector.z += moveRate;
+				moveVector.x += moveRate;
 			}
 			
 			if(Input.GetKey(KeyCode.S)) {
 				lookVector.x -= 1.0f;
 				lookVector.z -= 1.0f;
 
-				moveVector.z -= movementRate;
-				moveVector.x -= movementRate;
+				moveVector.z -= moveRate;
+				moveVector.x -= moveRate;
 			}
 
 			if(Input.GetKey(KeyCode.A)) {
 				lookVector.x -= 1.0f;
 				lookVector.z += 1.0f;
 
-				moveVector.x -= movementRate;
-				moveVector.z += movementRate;
+				moveVector.x -= moveRate;
+				moveVector.z += moveRate;
 			}
 
 			if(Input.GetKey(KeyCode.D)) {
 				lookVector.x += 1.0f;
 				lookVector.z -= 1.0f;
 
-				moveVector.x += movementRate;
-				moveVector.z -= movementRate;
+				moveVector.x += moveRate;
+				moveVector.z -= moveRate;
 			}
 
 			transform.position = moveVector;
@@ -82,6 +101,18 @@ namespace GameProject {
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnRate);
 
 			//Debug.LogFormat("Forward Vector x: {0} y: {0} z: {0}", lookVector.x, lookVector.y, lookVector.z);
+		}
+
+		public void appendMovementRate(float rate) {
+			movementRate += rate;
+		}
+
+		public void reduceMovementRate(float percent) {
+			movementRate = movementRate * percent;
+		}
+
+		public void resetMovementRate() {
+			movementRate = maxMovementRate;
 		}
 	}
 }
