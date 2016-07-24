@@ -8,24 +8,70 @@ namespace GameProject {
 	/// from Items, but player would need to do this.
 	/// </summary>
 	public class MovementController : MonoBehaviour {
+		/// <summary>
+		/// Movement rate, the speed of the transform that is moving.
+		/// </summary>
 		public float movementRate = 0.05f;
+		/// <summary>
+		/// The sprint speed boost, which is appended to <see cref="movementRate"/>.
+		/// </summary>
 		public float sprintRate = 0.1f;
-		public bool isAttacking = false;
+		/// <summary>
+		/// Check if the transform is focusing, which will cause it to slow down.
+		/// </summary>
+		public bool isFocusing = false;
+		/// <summary>
+		/// Camera that is attached.
+		/// </summary>
 		public Camera cam = null;
-
+		/// <summary>
+		/// The rate, or how fast, at which the transform rotates.
+		/// </summary>
 		public float turnRate = 15.0f;
+		/// <summary>
+		/// How fast the transform rotates, which is appened to turnRate.
+		/// </summary>
 		public float sprintTurnRate = 12f;
-
-		private float attackFocusSlow;
+		/// <summary>
+		/// When transform <see cref="isFocusing"/>, focusSlow is the rate at which the transform
+		/// slows down, which is appended to <see cref="movementSlow"/>.
+		/// </summary>
+		private float focusSlow;
+		/// <summary>
+		/// Keeps the max sprint rate, to ensure we can reset our modified values.
+		/// </summary>
 		private float maxSprintRate;
+		/// <summary>
+		/// Keeps the max movment rate, to ensure we reset our modified values exactly as original.
+		/// </summary>
 		private float maxMovementRate;
+		/// <summary>
+		/// Keeps the max Turn rate, to ensure we reset our modified values as the original.
+		/// </summary>
 		private float maxTurnRate;
+		/// <summary>
+		/// Keeps the max sprint rotation rate, to ensure we reset our modified values as the original.
+		/// </summary>
 		private float maxSprintRotationRate;
-		private float maxAttackFocusSlow;
+		/// <summary>
+		/// Kees the max focus slow speed, to ensure we reset our modified values as the original.
+		/// </summary>
+		private float maxFocusSlow;
+		/// <summary>
+		/// Gives the zoom out rate of the camera, when needed.
+		/// </summary>
 		private float zoomOutRate;
+		/// <summary>
+		/// Gives the zoom in rate of the camera, when needed.
+		/// </summary>
 		private float zoomInRate;
+		/// <summary>
+		/// Determines if the transform is being zoomed in by the Camera.
+		/// </summary>
 		private bool isZoomedIn;
-
+		/// <summary>
+		/// The rotation of which the transform needs to reach.
+		/// </summary>
 		Quaternion targetRotation;
 		/// <summary>
 		/// The position of the movement at a certain direction.
@@ -52,8 +98,8 @@ namespace GameProject {
 			maxSprintRate = sprintRate;
 			maxTurnRate = turnRate;
 			maxSprintRotationRate = sprintTurnRate;
-			maxAttackFocusSlow = movementRate * 0.8f;
-			attackFocusSlow = maxAttackFocusSlow;
+			maxFocusSlow = movementRate * 0.8f;
+			focusSlow = maxFocusSlow;
 			zoomOutRate = 1f;
 			zoomInRate = 1f;
 		}
@@ -76,13 +122,13 @@ namespace GameProject {
 			}
 
 			if (Input.GetKey(KeyCode.Mouse1)) {
-				moveRate -= attackFocusSlow;
+				moveRate -= focusSlow;
 				Debug.LogFormat("moveRate: {0}", moveRate);
 				isZoomedIn = true;
-				isAttacking = true;
+				isFocusing = true;
 			} else {
 				isZoomedIn = false;
-				isAttacking = false;
+				isFocusing = false;
 			}
 
 			if (isZoomedIn) {
@@ -125,10 +171,10 @@ namespace GameProject {
 
 			transform.position = moveVector;
 
-			if (isAttacking) {
+			if (isFocusing) {
 				Plane plane = new Plane(Vector3.up, transform.position);
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+				Debug.DrawLine(ray.origin, ray.GetPoint(12f), Color.blue, 30f);
 				float hitDist = 0f;
 				if (plane.Raycast(ray, out hitDist)) {
 					Vector3 targetPoint = ray.GetPoint(hitDist);
