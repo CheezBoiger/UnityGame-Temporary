@@ -22,6 +22,9 @@ namespace GameProject {
 		private float maxTurnRate;
 		private float maxSprintRotationRate;
 		private float maxAttackFocusSlow;
+		private float zoomOutRate;
+		private float zoomInRate;
+		private bool isZoomedIn;
 
 		Quaternion targetRotation;
 		/// <summary>
@@ -44,14 +47,18 @@ namespace GameProject {
 		#endregion
 		// Use this for initialization
 		public virtual void Start() {
+			isZoomedIn = false;
 			maxMovementRate = movementRate;
 			maxSprintRate = sprintRate;
 			maxTurnRate = turnRate;
 			maxSprintRotationRate = sprintTurnRate;
 			maxAttackFocusSlow = movementRate * 0.8f;
 			attackFocusSlow = maxAttackFocusSlow;
+			zoomOutRate = 1f;
+			zoomInRate = 1f;
 		}
 
+		#region Update Algorithm
 		/// <summary>
 		/// Rotates the Target GameObject to the direction of travel, relying on normalization, along with moving 
 		/// the Target in several places by the moveVector.
@@ -63,26 +70,28 @@ namespace GameProject {
 			lookVector = transform.forward;
 			moveVector = this.transform.position;
 
-			Debug.Log("Object is moving!");
-
-			if(Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift)) {
-				Debug.Log("Sprinting!");
+			if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift)) {
 				rotationRate += sprintTurnRate;
 				moveRate += sprintRate;
 			}
 
-			if(Input.GetKey(KeyCode.Mouse1)) {
-				Debug.Log("Focusing!");
+			if (Input.GetKey(KeyCode.Mouse1)) {
 				moveRate -= attackFocusSlow;
 				Debug.LogFormat("moveRate: {0}", moveRate);
-				zoomInCamera();
+				isZoomedIn = true;
 				isAttacking = true;
 			} else {
-				zoomOutCamera();
+				isZoomedIn = false;
 				isAttacking = false;
 			}
 
-			if(Input.GetKey(KeyCode.W)) {
+			if (isZoomedIn) {
+				zoomInCamera(zoomInRate);
+			} else {
+				zoomOutCamera(zoomOutRate);
+			}
+
+			if (Input.GetKey(KeyCode.W)) {
 				lookVector.x += 1.0f;
 				lookVector.z += 1.0f;
 
@@ -90,7 +99,7 @@ namespace GameProject {
 				moveVector.x += moveRate;
 			}
 			
-			if(Input.GetKey(KeyCode.S)) {
+			if (Input.GetKey(KeyCode.S)) {
 				lookVector.x -= 1.0f;
 				lookVector.z -= 1.0f;
 
@@ -98,7 +107,7 @@ namespace GameProject {
 				moveVector.x -= moveRate;
 			}
 
-			if(Input.GetKey(KeyCode.A)) {
+			if (Input.GetKey(KeyCode.A)) {
 				lookVector.x -= 1.0f;
 				lookVector.z += 1.0f;
 
@@ -106,7 +115,7 @@ namespace GameProject {
 				moveVector.z += moveRate;
 			}
 
-			if(Input.GetKey(KeyCode.D)) {
+			if (Input.GetKey(KeyCode.D)) {
 				lookVector.x += 1.0f;
 				lookVector.z -= 1.0f;
 
@@ -116,43 +125,81 @@ namespace GameProject {
 
 			transform.position = moveVector;
 
-			if(!isAttacking) {
-				targetRotation = Quaternion.LookRotation(lookVector);
-			} else {
+			if (isAttacking) {
 				Vector3 mousPos = Input.mousePosition;
 				mousPos = Camera.main.ScreenToWorldPoint(mousPos);
 				mousPos.y = 0f;
-
 				Debug.LogFormat("mouspos x: {0} y: {0} z: {0}", mousPos.x, mousPos.y, mousPos.z);
-				targetRotation = Quaternion.LookRotation(mousPos);
+				targetRotation = Quaternion.LookRotation(mousPos.normalized);
+			} else {
+				Debug.Log("IM STILL FUCKING ROTATING.");
+				targetRotation = Quaternion.LookRotation(lookVector);
 			}
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnRate);
 			//Debug.LogFormat("Forward Vector x: {0} y: {0} z: {0}", lookVector.x, lookVector.y, lookVector.z);
 		}
+		#endregion
 
-		public void appendMovementRate(float rate) {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rate"></param>
+		public void AppendMovementRate(float rate) {
 			movementRate += rate;
 		}
 
-		public void reduceMovementRate(float percent) {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="percent"></param>
+		public void ReduceMovementRate(float percent) {
 			movementRate = movementRate * percent;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void resetMovementRate() {
 			movementRate = maxMovementRate;
 		}
 
-		private void zoomInCamera() {
+		public void SetZoomInRate(float rate) {
+			zoomInRate = rate;
+		}
+
+		public void SetZoomOutRate(float rate) {
+			zoomOutRate = rate;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private void zoomInCamera(float rate = 1f) {
 			if (cam) {
-				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 3f, Time.deltaTime);
+				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
+														  3f, 
+														  Time.deltaTime * rate);
 			}
 		}
 
-		private void zoomOutCamera() {
+		/// <summary>
+		/// 
+		/// </summary>
+		private void zoomOutCamera(float rate = 1f) {
 			if (cam) {
-				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 5f, Time.deltaTime);
+				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
+														  5f, 
+														  Time.deltaTime * rate);
 			}
+		}
+
+		/// <summary>
+		/// Zoom the camera. Use this function to start zooming in, update will do all the work.
+		/// </summary>
+		/// <param name="zoom"></param>
+		public void ZoomCamera(bool zoom) {
+			isZoomedIn = zoom;
 		}
 	}
 }
