@@ -41,7 +41,7 @@ namespace GameProject {
 			xPos = distance * 0.70710678f;
 			zPos = xPos;
 			yPos = distance * 0.57735f;
-			SetToShakeCamera(1, 0.5f, 0.3f);
+			SetToShakeCamera(1, 0.1f, 0.9f);
 		}
 
 		// Update is called once per frame

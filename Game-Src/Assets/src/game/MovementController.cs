@@ -126,11 +126,15 @@ namespace GameProject {
 			transform.position = moveVector;
 
 			if (isAttacking) {
-				Vector3 mousPos = Input.mousePosition;
-				mousPos = Camera.main.ScreenToWorldPoint(mousPos);
-				mousPos.y = 0f;
-				Debug.LogFormat("mouspos x: {0} y: {0} z: {0}", mousPos.x, mousPos.y, mousPos.z);
-				targetRotation = Quaternion.LookRotation(mousPos.normalized);
+				Plane plane = new Plane(Vector3.up, transform.position);
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+				float hitDist = 0f;
+				if (plane.Raycast(ray, out hitDist)) {
+					Vector3 targetPoint = ray.GetPoint(hitDist);
+					Debug.DrawLine(transform.position, targetPoint, Color.yellow, 30f, false);
+					targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+				}
 			} else {
 				Debug.Log("IM STILL FUCKING ROTATING.");
 				targetRotation = Quaternion.LookRotation(lookVector);
