@@ -10,14 +10,20 @@ namespace GameProject {
 	public class MovementController : MonoBehaviour {
 		public float movementRate = 0.05f;
 		public float sprintRate = 0.1f;
+		public bool isAttacking = false;
+		public Camera cam = null;
 
 		public float turnRate = 15.0f;
 		public float sprintTurnRate = 12f;
 
+		private float attackFocusSlow;
 		private float maxSprintRate;
 		private float maxMovementRate;
 		private float maxTurnRate;
 		private float maxSprintRotationRate;
+		private float maxAttackFocusSlow;
+
+		Quaternion targetRotation;
 		/// <summary>
 		/// The position of the movement at a certain direction.
 		/// </summary>
@@ -37,11 +43,13 @@ namespace GameProject {
 		}
 		#endregion
 		// Use this for initialization
-		void Start() {
+		public virtual void Start() {
 			maxMovementRate = movementRate;
 			maxSprintRate = sprintRate;
 			maxTurnRate = turnRate;
 			maxSprintRotationRate = sprintTurnRate;
+			maxAttackFocusSlow = movementRate * 0.8f;
+			attackFocusSlow = maxAttackFocusSlow;
 		}
 
 		/// <summary>
@@ -49,7 +57,7 @@ namespace GameProject {
 		/// the Target in several places by the moveVector.
 		/// </summary>
 		// Update is called once per frame
-		void Update() {
+		public virtual void Update() {
 			float rotationRate = turnRate;
 			float moveRate = movementRate;
 			lookVector = transform.forward;
@@ -61,6 +69,17 @@ namespace GameProject {
 				Debug.Log("Sprinting!");
 				rotationRate += sprintTurnRate;
 				moveRate += sprintRate;
+			}
+
+			if(Input.GetKey(KeyCode.Mouse1)) {
+				Debug.Log("Focusing!");
+				moveRate -= attackFocusSlow;
+				Debug.LogFormat("moveRate: {0}", moveRate);
+				zoomInCamera();
+				isAttacking = true;
+			} else {
+				zoomOutCamera();
+				isAttacking = false;
 			}
 
 			if(Input.GetKey(KeyCode.W)) {
@@ -97,9 +116,18 @@ namespace GameProject {
 
 			transform.position = moveVector;
 
-			Quaternion targetRotation = Quaternion.LookRotation(lookVector);
-			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnRate);
+			if(!isAttacking) {
+				targetRotation = Quaternion.LookRotation(lookVector);
+			} else {
+				Vector3 mousPos = Input.mousePosition;
+				mousPos = Camera.main.ScreenToWorldPoint(mousPos);
+				mousPos.y = 0f;
 
+				Debug.LogFormat("mouspos x: {0} y: {0} z: {0}", mousPos.x, mousPos.y, mousPos.z);
+				targetRotation = Quaternion.LookRotation(mousPos);
+			}
+
+			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnRate);
 			//Debug.LogFormat("Forward Vector x: {0} y: {0} z: {0}", lookVector.x, lookVector.y, lookVector.z);
 		}
 
@@ -113,6 +141,18 @@ namespace GameProject {
 
 		public void resetMovementRate() {
 			movementRate = maxMovementRate;
+		}
+
+		private void zoomInCamera() {
+			if (cam) {
+				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 3f, Time.deltaTime);
+			}
+		}
+
+		private void zoomOutCamera() {
+			if (cam) {
+				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 5f, Time.deltaTime);
+			}
 		}
 	}
 }
