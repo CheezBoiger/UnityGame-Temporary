@@ -178,8 +178,8 @@ namespace GameProject {
 		private void zoomInCamera(float rate = 1f) {
 			if (cam) {
 				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
-														  3f, 
-														  Time.deltaTime * rate);
+					3f, 
+					Time.deltaTime * rate);
 			}
 		}
 
@@ -189,8 +189,8 @@ namespace GameProject {
 		private void zoomOutCamera(float rate = 1f) {
 			if (cam) {
 				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
-														  5f, 
-														  Time.deltaTime * rate);
+					5f, 
+					Time.deltaTime * rate);
 			}
 		}
 
