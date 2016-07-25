@@ -97,7 +97,7 @@ namespace GameProject {
 		/// Transitions the camera.
 		/// </summary>
 		private void transition() {
-			if (transitionTimer <= 1 && target) {
+			if (transitionTimer < 1 && target) {
 				Vector3 startPos = transform.position;
 				transitionTimer += Time.deltaTime * (Time.timeScale / transitionDuration);
 
