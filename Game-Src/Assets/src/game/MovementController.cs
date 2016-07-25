@@ -21,7 +21,8 @@ namespace GameProject {
 		/// </summary>
 		public bool isFocusing = false;
 		/// <summary>
-		/// Camera that is attached.
+		/// Camera that is attached. Ensure that you attach the camera following this 
+		/// transform in order for this script to send modifications to it.
 		/// </summary>
 		public Camera cam = null;
 		/// <summary>
@@ -69,7 +70,9 @@ namespace GameProject {
 		/// The direction from which the target transform is facing. This is the forward facing vector.
 		/// </summary>
 		private Vector3 lookVector;
-
+		/// <summary>
+		/// The Fixed Camera
+		/// </summary>
 		private CameraFixed c;
 
 		#region Getters and Setters
@@ -83,7 +86,7 @@ namespace GameProject {
 		#endregion
 		// Use this for initialization
 		public virtual void Start() {
-			c = Camera.main.GetComponent<CameraFixed>();
+			c = cam.GetComponent<CameraFixed>();
 			maxMovementRate = movementRate;
 			maxSprintRate = sprintRate;
 			maxTurnRate = turnRate;
@@ -112,10 +115,14 @@ namespace GameProject {
 			if (Input.GetKey(KeyCode.Mouse1)) {
 				moveRate -= focusSlow;
 				Debug.LogFormat("moveRate: {0}", moveRate);
-				c.ZoomCamera(true);
+				if (c) {
+					c.ZoomCamera(true);
+				}
 				isFocusing = true;
 			} else {
-				c.ZoomCamera(false);
+				if (c) {
+					c.ZoomCamera(false);
+				}
 				isFocusing = false;
 			}
 
@@ -153,13 +160,13 @@ namespace GameProject {
 
 			transform.position = moveVector;
 
-			if (isFocusing) {
+			if (isFocusing && cam) {
 				Plane plane = new Plane(Vector3.up, transform.position);
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
 				Debug.DrawLine(ray.origin, ray.GetPoint(12f), Color.blue, 30f);
 				float hitDist = 0f;
-
+				
 				if (plane.Raycast(ray, out hitDist)) {
 					Vector3 targetPoint = ray.GetPoint(hitDist);
 					Debug.DrawLine(transform.position, targetPoint, Color.yellow, 30f, false);
