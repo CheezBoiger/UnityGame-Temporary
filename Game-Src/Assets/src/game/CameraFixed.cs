@@ -17,6 +17,9 @@ namespace GameProject {
 		/// The distance from the Transform.
 		/// </summary>
 		public float distance = 10.0f;
+
+		public float transitionDuration = 2.5f;
+		private float transitionTimer;
 		/// <summary>
 		/// The xPosition offset from the transform.
 		/// </summary>
@@ -35,6 +38,7 @@ namespace GameProject {
 		private float decreaseFactor = 1.0f;
 
 		private Vector3 originalPos;
+		private bool isTransitioning = false;
 
 		void Start() { 
 			// Calculate the x, y, and z position from the Transform we are following.
@@ -47,7 +51,11 @@ namespace GameProject {
 		// Update is called once per frame
 		void LateUpdate () {
 			if(target) {
-				transform.position = new Vector3(target.position.x - xPos,target.position.y + yPos,target.position.z - zPos);
+				if (!isTransitioning) {
+					transform.position = new Vector3(target.position.x - xPos, target.position.y + yPos, target.position.z - zPos);
+				} else {
+					transition();
+				}
 				//transform.rotation = Quaternion.identity;
 				originalPos = transform.position;
 				shakeCamera();
@@ -80,5 +88,41 @@ namespace GameProject {
 				transform.position = originalPos;
 			}
 		}
+		/// <summary>
+		/// Transitions the camera.
+		/// </summary>
+		private void transition() {
+			if (transitionDuration <= 1 && target) {
+				Vector3 startPos = transform.position;
+				transitionDuration += Time.deltaTime * (Time.timeScale / transitionTimer);
+
+				transform.position = Vector3.Lerp(startPos, 
+					new Vector3(target.position.x - xPos, target.position.y + yPos, target.position.z - zPos), 
+					transitionDuration);
+			} else {
+				transitionDuration = 1f;
+				transform.position = originalPos;
+				isTransitioning = false;
+			}
+		}
+
+		/// <summary>
+		/// Start the transition, will have camera move to the next transform, smoothly.
+		/// </summary>
+		/// <param name="duration"></param>
+		public void StartTransition(float duration) {
+			transitionDuration = 0f;
+			transitionTimer = duration;
+			isTransitioning = true;
+		}
+
+		/// <summary>
+		/// Set the new transform, then call <see cref="StartTransition(float duration)"/> to begin transition.
+		/// </summary>
+		/// <param name="newTransform"></param>
+		public void setNewTransform(Transform newTransform) {
+			target = newTransform;
+		}
+		
 	}
 }

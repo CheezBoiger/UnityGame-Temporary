@@ -174,8 +174,10 @@ namespace GameProject {
 			if (isFocusing) {
 				Plane plane = new Plane(Vector3.up, transform.position);
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
 				Debug.DrawLine(ray.origin, ray.GetPoint(12f), Color.blue, 30f);
 				float hitDist = 0f;
+
 				if (plane.Raycast(ray, out hitDist)) {
 					Vector3 targetPoint = ray.GetPoint(hitDist);
 					Debug.DrawLine(transform.position, targetPoint, Color.yellow, 30f, false);
