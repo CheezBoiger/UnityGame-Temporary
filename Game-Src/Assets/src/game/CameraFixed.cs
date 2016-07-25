@@ -57,7 +57,10 @@ namespace GameProject {
 		void LateUpdate () {
 			if(target) {
 				if (!isTransitioning) {
-					transform.position = new Vector3(target.position.x - xPos, target.position.y + yPos, target.position.z - zPos);
+					transform.position = new Vector3(target.position.x - xPos, 
+						target.position.y + yPos, 
+						target.position.z - zPos);
+
 				} else {
 					transition();
 				}
