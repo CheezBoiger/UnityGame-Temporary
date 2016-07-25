@@ -17,8 +17,13 @@ namespace GameProject {
 		/// The distance from the Transform.
 		/// </summary>
 		public float distance = 10.0f;
-
+		/// <summary>
+		/// Set the transition duration, for smooth movement. The higher the number, the slower the transition.
+		/// </summary>
 		public float transitionDuration = 2.5f;
+		/// <summary>
+		/// Timer for the transition to start.
+		/// </summary>
 		private float transitionTimer;
 		/// <summary>
 		/// The xPosition offset from the transform.
@@ -92,15 +97,15 @@ namespace GameProject {
 		/// Transitions the camera.
 		/// </summary>
 		private void transition() {
-			if (transitionDuration <= 1 && target) {
+			if (transitionTimer <= 1 && target) {
 				Vector3 startPos = transform.position;
-				transitionDuration += Time.deltaTime * (Time.timeScale / transitionTimer);
+				transitionTimer += Time.deltaTime * (Time.timeScale / transitionDuration);
 
 				transform.position = Vector3.Lerp(startPos, 
 					new Vector3(target.position.x - xPos, target.position.y + yPos, target.position.z - zPos), 
-					transitionDuration);
+					transitionTimer);
 			} else {
-				transitionDuration = 1f;
+				transitionTimer = 1f;
 				transform.position = originalPos;
 				isTransitioning = false;
 			}
@@ -111,8 +116,8 @@ namespace GameProject {
 		/// </summary>
 		/// <param name="duration"></param>
 		public void StartTransition(float duration) {
-			transitionDuration = 0f;
-			transitionTimer = duration;
+			transitionDuration = duration;
+			transitionTimer = 0f;
 			isTransitioning = true;
 		}
 
