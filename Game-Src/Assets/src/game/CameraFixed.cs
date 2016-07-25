@@ -62,6 +62,7 @@ namespace GameProject {
 		private Vector3 originalPos;
 		private bool isTransitioning = false;
 
+
 		void Start() { 
 			// Calculate the x, y, and z position from the Transform we are following.
 			xPos = distance * 0.70710678f;
@@ -73,6 +74,7 @@ namespace GameProject {
 			cam = GetComponent<Camera>();
 			SetToShakeCamera(1, 0.1f, 0.9f);
 		}
+
 
 		// Update is called once per frame
 		void LateUpdate () {
@@ -99,6 +101,7 @@ namespace GameProject {
 			}
 		}
 
+
 		/// <summary>
 		/// Sets up to shake the camera.
 		/// </summary>
@@ -110,6 +113,7 @@ namespace GameProject {
 			shakeAmount = amount;
 			decreaseFactor = factor;
 		}
+
 
 		/// <summary>
 		/// Perform camera shake.
@@ -124,6 +128,8 @@ namespace GameProject {
 				transform.position = originalPos;
 			}
 		}
+
+
 		/// <summary>
 		/// Transitions the camera.
 		/// </summary>
@@ -142,6 +148,7 @@ namespace GameProject {
 			}
 		}
 
+
 		/// <summary>
 		/// Start the transition, will have camera move to the next transform, smoothly.
 		/// </summary>
@@ -152,6 +159,7 @@ namespace GameProject {
 			isTransitioning = true;
 		}
 
+
 		/// <summary>
 		/// Set the new transform, then call <see cref="StartTransition(float duration)"/> to begin transition.
 		/// </summary>
@@ -160,11 +168,20 @@ namespace GameProject {
 			target = newTransform;
 		}
 		
-		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rate"></param>
 		public void SetZoomInRate(float rate) {
 			zoomInRate = rate;
 		}
 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rate"></param>
 		public void SetZoomOutRate(float rate) {
 			zoomOutRate = rate;
 		}
@@ -180,6 +197,7 @@ namespace GameProject {
 			}
 		}
 
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -190,6 +208,7 @@ namespace GameProject {
 					Time.deltaTime * rate);
 			}
 		}
+
 
 		/// <summary>
 		/// Zoom the camera. Use this function to start zooming in, update will do all the work.
