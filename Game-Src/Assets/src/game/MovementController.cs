@@ -58,18 +58,6 @@ namespace GameProject {
 		/// </summary>
 		private float maxFocusSlow;
 		/// <summary>
-		/// Gives the zoom out rate of the camera, when needed.
-		/// </summary>
-		private float zoomOutRate;
-		/// <summary>
-		/// Gives the zoom in rate of the camera, when needed.
-		/// </summary>
-		private float zoomInRate;
-		/// <summary>
-		/// Determines if the transform is being zoomed in by the Camera.
-		/// </summary>
-		private bool isZoomedIn;
-		/// <summary>
 		/// The rotation of which the transform needs to reach.
 		/// </summary>
 		Quaternion targetRotation;
@@ -82,6 +70,8 @@ namespace GameProject {
 		/// </summary>
 		private Vector3 lookVector;
 
+		private CameraFixed c;
+
 		#region Getters and Setters
 		public float MovementRate {
 			get {
@@ -93,15 +83,13 @@ namespace GameProject {
 		#endregion
 		// Use this for initialization
 		public virtual void Start() {
-			isZoomedIn = false;
+			c = Camera.main.GetComponent<CameraFixed>();
 			maxMovementRate = movementRate;
 			maxSprintRate = sprintRate;
 			maxTurnRate = turnRate;
 			maxSprintRotationRate = sprintTurnRate;
 			maxFocusSlow = movementRate * 0.8f;
 			focusSlow = maxFocusSlow;
-			zoomOutRate = 1f;
-			zoomInRate = 1f;
 		}
 
 		#region Update Algorithm
@@ -124,17 +112,11 @@ namespace GameProject {
 			if (Input.GetKey(KeyCode.Mouse1)) {
 				moveRate -= focusSlow;
 				Debug.LogFormat("moveRate: {0}", moveRate);
-				isZoomedIn = true;
+				c.ZoomCamera(true);
 				isFocusing = true;
 			} else {
-				isZoomedIn = false;
+				c.ZoomCamera(false);
 				isFocusing = false;
-			}
-
-			if (isZoomedIn) {
-				zoomInCamera(zoomInRate);
-			} else {
-				zoomOutCamera(zoomOutRate);
 			}
 
 			if (Input.GetKey(KeyCode.W)) {
@@ -214,44 +196,6 @@ namespace GameProject {
 		/// </summary>
 		public void resetMovementRate() {
 			movementRate = maxMovementRate;
-		}
-
-		public void SetZoomInRate(float rate) {
-			zoomInRate = rate;
-		}
-
-		public void SetZoomOutRate(float rate) {
-			zoomOutRate = rate;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		private void zoomInCamera(float rate = 1f) {
-			if (cam) {
-				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
-					3f, 
-					Time.deltaTime * rate);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		private void zoomOutCamera(float rate = 1f) {
-			if (cam) {
-				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
-					5f, 
-					Time.deltaTime * rate);
-			}
-		}
-
-		/// <summary>
-		/// Zoom the camera. Use this function to start zooming in, update will do all the work.
-		/// </summary>
-		/// <param name="zoom"></param>
-		public void ZoomCamera(bool zoom) {
-			isZoomedIn = zoom;
 		}
 	}
 }

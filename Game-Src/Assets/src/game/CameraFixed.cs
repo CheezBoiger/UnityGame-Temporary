@@ -37,6 +37,23 @@ namespace GameProject {
 		/// The z position offset from the transform.
 		/// </summary>
 		private float zPos;
+		/// <summary>
+		/// Gives the zoom out rate of the camera, when needed.
+		/// </summary>
+		private float zoomOutRate;
+		/// <summary>
+		/// Gives the zoom in rate of the camera, when needed.
+		/// </summary>
+		private float zoomInRate;
+		/// <summary>
+		/// Determines if the transform is being zoomed in by the Camera.
+		/// </summary>
+		private bool isZoomedIn;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private Camera cam;
 
 		private float shakeDuration;
 		private float shakeAmount = 1f;
@@ -50,6 +67,10 @@ namespace GameProject {
 			xPos = distance * 0.70710678f;
 			zPos = xPos;
 			yPos = distance * 0.57735f;
+			isZoomedIn = false;
+			zoomOutRate = 1f;
+			zoomInRate = 1f;
+			cam = GetComponent<Camera>();
 			SetToShakeCamera(1, 0.1f, 0.9f);
 		}
 
@@ -64,6 +85,13 @@ namespace GameProject {
 				} else {
 					transition();
 				}
+
+				if (isZoomedIn) {
+					zoomInCamera(zoomInRate);
+				} else {
+					zoomOutCamera(zoomOutRate);
+				}
+
 				//transform.rotation = Quaternion.identity;
 				originalPos = transform.position;
 				shakeCamera();
@@ -132,5 +160,43 @@ namespace GameProject {
 			target = newTransform;
 		}
 		
+		
+		public void SetZoomInRate(float rate) {
+			zoomInRate = rate;
+		}
+
+		public void SetZoomOutRate(float rate) {
+			zoomOutRate = rate;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private void zoomInCamera(float rate = 1f) {
+			if (cam) {
+				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
+					3f, 
+					Time.deltaTime * rate);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private void zoomOutCamera(float rate = 1f) {
+			if (cam) {
+				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 
+					5f, 
+					Time.deltaTime * rate);
+			}
+		}
+
+		/// <summary>
+		/// Zoom the camera. Use this function to start zooming in, update will do all the work.
+		/// </summary>
+		/// <param name="zoom"></param>
+		public void ZoomCamera(bool zoom) {
+			isZoomedIn = zoom;
+		}
 	}
 }
