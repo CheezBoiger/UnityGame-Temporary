@@ -156,7 +156,7 @@ namespace GameProject {
 		/// Set the new transform, then call <see cref="StartTransition(float duration)"/> to begin transition.
 		/// </summary>
 		/// <param name="newTransform"></param>
-		public void setNewTransform(Transform newTransform) {
+		public void SetNewTransform(Transform newTransform) {
 			target = newTransform;
 		}
 		
