@@ -61,12 +61,18 @@ namespace GameProject {
 			if (currentHealth > maxHealth || currentHealth < 0) {
 				currentHealth = maxHealth;
 			}
+
+			if (maxHealth > 0) {
+				isAlive = true;
+			}
 		}
 
 		public void Update() {
-			currentHealth += Time.deltaTime * healthRegenRate;
+			if (currentHealth < maxHealth && isAlive) {
+				currentHealth += Time.deltaTime * healthRegenRate;
+			}
 
-			if (currentHealth > maxHealth) {
+			if (currentHealth > maxHealth && isAlive) {
 				currentHealth = maxHealth;
 			}
 		}
@@ -135,6 +141,15 @@ namespace GameProject {
 		/// </summary>
 		public void ResetHealthRegen() {
 			healthRegenRate = maxHealthRegenRate;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Revive() {
+			ResetHealthRegen();
+			ResetMaxHealth();
+			isAlive = true;
+			currentHealth = maxHealth;
 		}
 	}
 }
