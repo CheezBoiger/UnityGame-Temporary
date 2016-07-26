@@ -6,7 +6,7 @@ namespace GameProject {
 	/// Health is an ADT, designed to handle methods of modifying, reducing, and 
 	/// keeping track of the Object's health.
 	/// </summary>
-	public class Health {
+	public class Health : MonoBehaviour {
 		/// <summary>
 		/// Base health of any Actor, or object.
 		/// </summary>
@@ -14,7 +14,7 @@ namespace GameProject {
 		/// <summary>
 		/// The current health that the Actor, or object, has.
 		/// </summary>
-		private float currentHealth;
+		public float currentHealth;
 		/// <summary>
 		/// Current max Health of the Actor, or Object.
 		/// </summary>
@@ -56,12 +56,19 @@ namespace GameProject {
 
 		public void Start() {
 			maxHealth = baseHealth;
-			currentHealth = maxHealth;
 			maxHealthStatus = maxHealth;
+
+			if (currentHealth > maxHealth || currentHealth < 0) {
+				currentHealth = maxHealth;
+			}
 		}
 
 		public void Update() {
+			currentHealth += Time.deltaTime * healthRegenRate;
 
+			if (currentHealth > maxHealth) {
+				currentHealth = maxHealth;
+			}
 		}
 		/// <summary>
 		/// Appends the health. It is dynamic, which means you can either add health, 
