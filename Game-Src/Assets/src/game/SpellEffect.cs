@@ -10,6 +10,8 @@ namespace GameProject {
 		OBJECTS,
 		PROJECTILES,
 		ITEMS,
+		SPELLS,
+		ABILITIES,
 	}
 
 	/// <summary>

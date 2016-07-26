@@ -28,7 +28,7 @@ namespace GameProject {
 	/// Ability marks the available actions that an Actor may be able to do. This means, An actor, such as an enemy, or the player,
 	/// will be given special actions so as to make the game much more unique in terms of the behaviour of our Actors.
 	/// </summary>
-	public abstract class Ability {
+	public abstract class Ability : Entity {
 		private float damage;
 		private float mod;
 	}
