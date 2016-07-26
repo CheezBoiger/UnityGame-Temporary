@@ -54,6 +54,9 @@ namespace GameProject {
 
 		#endregion
 
+		/// <summary>
+		/// Called once!!
+		/// </summary>
 		public void Start() {
 			maxHealth = baseHealth;
 			maxHealthStatus = maxHealth;
@@ -66,7 +69,9 @@ namespace GameProject {
 				isAlive = true;
 			}
 		}
-
+		/// <summary>
+		/// Called once per frame!!
+		/// </summary>
 		public void Update() {
 			if (currentHealth < maxHealth && isAlive) {
 				currentHealth += Time.deltaTime * healthRegenRate;

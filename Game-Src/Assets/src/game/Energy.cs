@@ -7,10 +7,21 @@ namespace GameProject {
 	/// Object's health.
 	/// </summary>
 	public class Energy : MonoBehaviour {
+		/// <summary>
+		/// Base Energy of any Actor, or object.
+		/// </summary>
 		public float baseEnergy;
-
+		/// <summary>
+		/// Current energy that this Actor, or object, has.
+		/// </summary>
 		private float currentEnergy;
+		/// <summary>
+		/// The maximum energy that this Actor, or Object, has.
+		/// </summary>
 		private float maxEnergy;
+		/// <summary>
+		/// 
+		/// </summary>
 		private float currentMaxEnergyStatus;
 
 		private float energyRegenRate;

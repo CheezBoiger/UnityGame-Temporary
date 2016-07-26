@@ -217,5 +217,13 @@ namespace GameProject {
 		public void ZoomCamera(bool zoom) {
 			isZoomedIn = zoom;
 		}
+
+		public void IncreaseCameraShake(float shakeIncrease) {
+
+		}
+
+		public void DecreaseCameraShake(float shakeDecrease) {
+
+		}
 	}
 }
