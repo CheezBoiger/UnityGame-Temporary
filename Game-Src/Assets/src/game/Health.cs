@@ -41,6 +41,10 @@ namespace GameProject {
 		/// Is the Actor, or Object, still alive?
 		/// </summary>
 		private bool isAlive;
+		/// <summary>
+		/// 
+		/// </summary>
+		private bool damaged;
 
 		#region Getters and Setters
 
@@ -54,10 +58,12 @@ namespace GameProject {
 
 		#endregion
 
+		
 		/// <summary>
 		/// Called once!!
 		/// </summary>
 		public void Start() {
+
 			maxHealth = baseHealth;
 			maxHealthStatus = maxHealth;
 
@@ -68,26 +74,55 @@ namespace GameProject {
 			if (maxHealth > 0) {
 				isAlive = true;
 			}
+
+			damaged = false;
 		}
+		
+		
 		/// <summary>
 		/// Called once per frame!!
 		/// </summary>
 		public void Update() {
-			if (currentHealth < maxHealth && isAlive) {
+
+			//Vector3 wantedPos = Camera.main.WorldToViewportPoint(transform.position);
+			//transform.position = wantedPos;
+
+			if (((currentHealth < maxHealth) ||
+				(healthRegenRate < 0)) && isAlive) {
 				currentHealth += Time.deltaTime * healthRegenRate;
 			}
 
 			if (currentHealth > maxHealth && isAlive) {
 				currentHealth = maxHealth;
 			}
+
+			if (currentHealth <= 0.0f) {
+				isAlive = false;
+			}
+
+			if (damaged) {
+
+			} else {
+
+			}
 		}
+
+		public float GetHealth() {
+			return currentHealth;
+		}
+
+		public float GetMaxHealth() {
+			return maxHealth;
+		}
+
+		
 		/// <summary>
 		/// Appends the health. It is dynamic, which means you can either add health, 
 		/// or remove some. Checks if the health reaches at or below 0, to which the 
 		/// Object is considered, dead.
 		/// </summary>
 		/// <param name="health"></param>
-		public void AppendHealth(float health) {
+		private void appendHealth(float health) {
 			currentHealth += health;
 
 			if(currentHealth <= 0) {
@@ -96,6 +131,8 @@ namespace GameProject {
 				isAlive = true;
 			}
 		}
+		
+		
 		/// <summary>
 		/// Appends health to max health. This will increase, or decrease, the overall
 		/// maximum health of the Object.
@@ -106,6 +143,7 @@ namespace GameProject {
 			maxHealthStatus = maxHealth;
 		}
 
+		
 		/// <summary>
 		/// Reduces maximum health by a certain percentage.
 		/// </summary>
@@ -116,6 +154,7 @@ namespace GameProject {
 			currentHealth = currentHealth * percentage;
 		}
 
+		
 		/// <summary>
 		/// Resets the maxHealth status to the original. Keep in mind that the 
 		/// current health stays relative to the max health.
@@ -127,6 +166,8 @@ namespace GameProject {
 			// Fix current Health relative to the maxHealth.
 			currentHealth *= factor;
 		}
+		
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -134,6 +175,8 @@ namespace GameProject {
 		public void AppendHealthRegenRateByPercentage(float percentage) {
 			healthRegenRate = healthRegenRate * percentage;
 		}
+		
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -141,12 +184,16 @@ namespace GameProject {
 		public void AppendHealthRegenRate(float regen) {
 			healthRegenRate += regen;
 		}
+		
+		
 		/// <summary>
 		/// 
 		/// </summary>
 		public void ResetHealthRegen() {
 			healthRegenRate = maxHealthRegenRate;
 		}
+		
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -155,6 +202,30 @@ namespace GameProject {
 			ResetMaxHealth();
 			isAlive = true;
 			currentHealth = maxHealth;
+		}
+		
+		
+		/// <summary>
+		/// Gives the damage to the current health. Needed to 
+		/// trigger certain death affects ingame, when we add animators to this
+		/// ADT.
+		/// </summary>
+		/// <param name="damage"></param>
+		public void ReceiveDamage(float damage) {
+			appendHealth(-damage);
+
+
+			damaged = true;
+		}
+		
+		
+		/// <summary>
+		/// Recieve health from unknown sources. Needed so that we can add effects to
+		/// this ADT.
+		/// </summary>
+		/// <param name="heal"></param>
+		public void ReceiveHeal(float heal) {
+			appendHealth(heal);
 		}
 	}
 }
