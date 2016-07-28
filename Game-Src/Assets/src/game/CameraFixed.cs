@@ -97,7 +97,7 @@ namespace GameProject {
 				//transform.rotation = Quaternion.identity;
 				originalPos = transform.position;
 				shakeCamera();
-				transform.eulerAngles = new Vector3(30,45,0);
+				transform.eulerAngles = new Vector3(30, 45, 0);
 			}
 		}
 
@@ -186,6 +186,7 @@ namespace GameProject {
 			zoomOutRate = rate;
 		}
 
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -218,9 +219,11 @@ namespace GameProject {
 			isZoomedIn = zoom;
 		}
 
+
 		public void IncreaseCameraShake(float shakeIncrease) {
 
 		}
+
 
 		public void DecreaseCameraShake(float shakeDecrease) {
 

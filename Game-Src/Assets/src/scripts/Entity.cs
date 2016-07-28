@@ -4,12 +4,14 @@ using System.Collections;
 
 namespace GameProject {
 
-	enum ObjectType {
-	  UNKNOWN,
-	  PLAYER,
-	  ENEMY,
-	  INANIMATE,
-	  BREAKABLE,
+	public enum ObjectType {
+		UNKNOWN,
+		PLAYER,
+		ENEMY,
+		INANIMATE,
+		BREAKABLE,
+		ITEM,
+		PROJECTILE,
 	}
 
 	/// <summary>
@@ -20,24 +22,30 @@ namespace GameProject {
 	/// writing our enemies, items, walls, breakables, crates, etc...
 	/// </summary>
 	public abstract class Entity : MonoBehaviour {
-	  float xPos;
-	  float yPos;
-	  // Maybe 3D vectors needed.
-	  float zPos;
+		protected float xPos;
+		protected float yPos;
+		// Maybe 3D vectors needed.
+		protected float zPos;
 
-	  ObjectType type;
-	  bool invulnerable;
+		protected ObjectType objectType;
+		protected bool invulnerable;
+		/// <summary>
+		/// Slow down time using this variable.
+		/// </summary>
+		protected bool slowedDown;
+		
 
-	  public Entity() {
-	    xPos = this.transform.position.x;
-	    yPos = this.transform.position.y;
-	    zPos = this.transform.position.z;
-	    invulnerable = true;
-	    type = ObjectType.UNKNOWN;
-	  }
+		public Entity() {
+			xPos = this.transform.position.x;
+			yPos = this.transform.position.y;
+			zPos = this.transform.position.z;
+			invulnerable = true;
+			objectType = ObjectType.UNKNOWN;
+			slowedDown = false;
+		}
 
 
-	  public abstract void Start();
-	  public abstract void Update();
+		public abstract void Start();
+		public abstract void Update();
 	}
 } // namespace GameProject
