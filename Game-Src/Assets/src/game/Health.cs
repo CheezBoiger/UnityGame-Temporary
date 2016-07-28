@@ -8,7 +8,8 @@ namespace GameProject {
 	/// </summary>
 	public class Health : MonoBehaviour {
 		/// <summary>
-		/// Base health of any Actor, or object.
+		/// Base health of any Actor, or object. Not modified by anything.
+		/// This is the naked bare minimum health, without modifications.
 		/// </summary>
 		public float baseHealth;
 		/// <summary>
@@ -18,12 +19,12 @@ namespace GameProject {
 		/// <summary>
 		/// Current max Health of the Actor, or Object.
 		/// </summary>
-		public float maxHealth;
+		private float maxHealth;
 		/// <summary>
 		/// Max Health Status will be the current status of the maximum
 		/// health, so as to not tinker with the original max health.
 		/// </summary>
-		public float maxHealthStatus;
+		private float maxHealthStatus;
 		/// <summary>
 		/// Current health regeneration rate (hp per sec).
 		/// </summary>
