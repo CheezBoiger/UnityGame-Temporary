@@ -87,7 +87,7 @@ namespace GameProject {
 				}
 
 				if (!healthBarBk) {
-					Debug.Log("No helath bk as well!");
+					Debug.Log("No health bk as well!");
 				}
 
 				throw new MissingReferenceException();
