@@ -18,12 +18,12 @@ namespace GameProject {
 		/// <summary>
 		/// Current max Health of the Actor, or Object.
 		/// </summary>
-		private float maxHealth;
+		public float maxHealth;
 		/// <summary>
 		/// Max Health Status will be the current status of the maximum
 		/// health, so as to not tinker with the original max health.
 		/// </summary>
-		private float maxHealthStatus;
+		public float maxHealthStatus;
 		/// <summary>
 		/// Current health regeneration rate (hp per sec).
 		/// </summary>
@@ -87,13 +87,13 @@ namespace GameProject {
 			//Vector3 wantedPos = Camera.main.WorldToViewportPoint(transform.position);
 			//transform.position = wantedPos;
 
-			if (((currentHealth < maxHealth) ||
+			if (((currentHealth < maxHealthStatus) ||
 				(healthRegenRate < 0)) && isAlive) {
 				currentHealth += Time.deltaTime * healthRegenRate;
 			}
 
-			if (currentHealth > maxHealth && isAlive) {
-				currentHealth = maxHealth;
+			if (currentHealth > maxHealthStatus && isAlive) {
+				currentHealth = maxHealthStatus;
 			}
 
 			if (currentHealth <= 0.0f) {
@@ -115,7 +115,9 @@ namespace GameProject {
 			return maxHealth;
 		}
 
-		
+		public float GetMaxHealthStatus() {
+			return maxHealthStatus;
+		}
 		/// <summary>
 		/// Appends the health. It is dynamic, which means you can either add health, 
 		/// or remove some. Checks if the health reaches at or below 0, to which the 
