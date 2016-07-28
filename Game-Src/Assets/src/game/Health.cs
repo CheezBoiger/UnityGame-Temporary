@@ -24,7 +24,7 @@ namespace GameProject {
 		/// Max Health Status will be the current status of the maximum
 		/// health, so as to not tinker with the original max health.
 		/// </summary>
-		private float maxHealthStatus;
+		public float maxHealthStatus;
 		/// <summary>
 		/// Current health regeneration rate (hp per sec).
 		/// </summary>

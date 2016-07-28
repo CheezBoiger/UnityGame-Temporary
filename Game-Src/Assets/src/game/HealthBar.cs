@@ -7,6 +7,11 @@ namespace GameProject {
 	/// 
 	/// </summary>
 	public class HealthBar : MonoBehaviour {
+		private const float MAX_BAR_HEIGHT = 2f;
+		private const float MAX_BAR_WIDTH_REDUCTION = 0.5f;
+		private const float MAX_BAR_WIDTH = 128.0f;
+
+		private float healthToBarWidth;
 		/// <summary>
 		/// The distance of the canvas above the game object.
 		/// </summary>
@@ -34,6 +39,7 @@ namespace GameProject {
 
 		// Use this for initialization
 		void Start() {
+
 			healthBarTexture = GetComponent<Canvas>();
 			target = transform.parent.transform;
 			healthStatus = GetComponentInParent<Health>();
@@ -50,15 +56,23 @@ namespace GameProject {
 				.FindChild("HealthBack")
 				.FindChild("healthStatus")
 				.GetComponent<Image>();
+
+			healthToBarWidth = MAX_BAR_WIDTH * 2f;
 		}
 
 		// Update is called once per frame
 		void LateUpdate() {
 			if (healthBarTexture && healthBarStatus) {
+				Vector2 sizedVector;
 				float health = healthStatus.GetHealth();
 				float maxHealth = healthStatus.GetMaxHealthStatus();
 
-				Vector2 sizedVector = new Vector2((maxHealth * 0.4f), 4f);
+				if (maxHealth >= healthToBarWidth) {
+					sizedVector = new Vector2(MAX_BAR_WIDTH, MAX_BAR_HEIGHT);
+				} else {
+					sizedVector = new Vector2((maxHealth * MAX_BAR_WIDTH_REDUCTION), MAX_BAR_HEIGHT);
+				}
+
 				healthBarBk.rectTransform.sizeDelta = sizedVector;
 				healthBarStatus.rectTransform.sizeDelta = sizedVector;
 
