@@ -76,6 +76,9 @@ namespace GameProject {
 				isAlive = true;
 			}
 
+			maxHealthRegenRate = healthRegenRate;
+			maxHealthRegenRateStatus = maxHealthRegenRate;
+
 			damaged = false;
 		}
 		
@@ -229,6 +232,15 @@ namespace GameProject {
 		/// <param name="heal"></param>
 		public void ReceiveHeal(float heal) {
 			appendHealth(heal);
+		}
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public float GetExtraHealthFromMaxHealth() {
+			return maxHealthStatus - maxHealth; 
 		}
 	}
 }

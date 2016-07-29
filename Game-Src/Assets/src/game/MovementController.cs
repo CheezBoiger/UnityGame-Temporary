@@ -59,7 +59,7 @@ namespace GameProject {
 				}
 				isFocusing = false;
 			}
-
+			
 			if (Input.GetKey(KeyCode.W)) {
 				lookVector.x += 1.0f;
 				lookVector.z += 1.0f;
@@ -91,7 +91,7 @@ namespace GameProject {
 				moveVector.x += moveRate;
 				moveVector.z -= moveRate;
 			}
-
+			
 			transform.position = moveVector;
 
 			if (isFocusing && cam) {
