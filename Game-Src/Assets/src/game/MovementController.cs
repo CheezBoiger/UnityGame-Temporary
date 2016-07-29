@@ -9,6 +9,9 @@ namespace GameProject {
 	/// </summary>
 	public class MovementController : Movement {
 
+		private float duration = 1f;
+		public float increasing = 0.01f;
+		private float decreaseFactor = 1f;
 		#region Getters and Setters
 		public float MovementRate {
 			get {
@@ -50,12 +53,20 @@ namespace GameProject {
 				moveRate -= focusSlow;
 				Debug.LogFormat("moveRate: {0}", moveRate);
 				if (c) {
+					c.SetToShakeCamera(duration, increasing, decreaseFactor);
+					increasing += Time.deltaTime * 0.001f;
+
+					if (increasing > 0.1f) {
+						increasing = 0.1f;
+					}
 					c.ZoomCamera(true);
 				}
 				isFocusing = true;
 			} else {
 				if (c) {
 					c.ZoomCamera(false);
+					c.StopCameraShake();
+					increasing = 0.001f;
 				}
 				isFocusing = false;
 			}

@@ -233,5 +233,10 @@ namespace GameProject {
 		public void DecreaseCameraShake(float shakeDecrease) {
 
 		}
+
+
+		public void StopCameraShake() {
+			shakeDuration = 0;
+		}
 	}
 }

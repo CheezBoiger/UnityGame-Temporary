@@ -18,6 +18,8 @@ namespace GameProject {
 		/// </summary>
 		public float distanceAbove = 2.0f;
 		public float distanceBetweenBars = 1.0f;
+		private float lastHealthBarStatus;
+		private float lastCurrentHealthStatus;
 		/// <summary>
 		/// Health bar background.
 		/// </summary>
@@ -93,19 +95,35 @@ namespace GameProject {
 				float maxHealth = healthStatus.GetMaxHealthStatus();
 				float maxEnergy = energyStatus.GetMaxEnergyStatus();
 
+				if (health < lastCurrentHealthStatus) {
+					lastHealthBarStatus = lastCurrentHealthStatus;
+					lastCurrentHealthStatus = health;
+				} else {
+					lastCurrentHealthStatus = health;
+				}
+
 				if (maxHealth >= healthToBarWidth) {
 					sizedVector = new Vector2(MAX_BAR_WIDTH, MAX_BAR_HEIGHT);
 				} else {
 					sizedVector = new Vector2((maxHealth * MAX_BAR_WIDTH_REDUCTION), MAX_BAR_HEIGHT);
 				}
 
-				healthBarBk.rectTransform.sizeDelta = sizedVector;
-				healthBarStatus.rectTransform.sizeDelta = sizedVector;
-				energyBarBk.rectTransform.sizeDelta = sizedVector;
-				energyBarStatus.rectTransform.sizeDelta = sizedVector;
+				healthBarBk.rectTransform.sizeDelta =     Vector3.Lerp(healthBarBk.rectTransform.sizeDelta
+					, sizedVector, 
+					Time.deltaTime);
+				healthBarStatus.rectTransform.sizeDelta = Vector3.Lerp(healthBarStatus.rectTransform.sizeDelta, 
+					sizedVector, 
+					Time.deltaTime);
+				energyBarBk.rectTransform.sizeDelta =     Vector3.Lerp(energyBarBk.rectTransform.sizeDelta, 
+					sizedVector, 
+					Time.deltaTime);
+				energyBarStatus.rectTransform.sizeDelta = Vector3.Lerp(energyBarStatus.rectTransform.sizeDelta, 
+					sizedVector, 
+					Time.deltaTime);
 
 				healthBarStatus.fillAmount = health / maxHealth;
 				energyBarStatus.fillAmount = energy / maxEnergy;
+
 				Vector3 pos = Camera.main.WorldToScreenPoint(target.position);
 
 				healthBarBk.rectTransform.position = new Vector3(pos.x, pos.y + distanceAbove, pos.z);
