@@ -17,18 +17,31 @@ namespace GameProject {
 		/// The distance of the canvas above the game object.
 		/// </summary>
 		public float distanceAbove = 2.0f;
+		/// <summary>
+		/// 
+		/// </summary>
 		public float distanceBetweenBars = 1.0f;
-		private float lastHealthBarStatus;
-		private float lastCurrentHealthStatus;
+		/// <summary>
+		/// 
+		/// </summary>
+		private float lastHealthBarStatus = 0f;
+		/// <summary>
+		/// 
+		/// </summary>
+		private float lastCurrentHealthStatus = 0f;
 		/// <summary>
 		/// Health bar background.
 		/// </summary>
 		private Image healthBarBk;
+		/// <summary>
+		/// 
+		/// </summary>
 		private Image energyBarBk;
 		/// <summary>
 		/// health bar status for the current health.
 		/// </summary>
 		private Image healthBarStatus;
+		private Image healthBarTaken;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -71,7 +84,13 @@ namespace GameProject {
 
 			healthBarStatus = transform
 				.FindChild("HealthBack")
+				.FindChild("healthTaken")
 				.FindChild("healthStatus")
+				.GetComponent<Image>();
+
+			healthBarTaken = transform
+				.FindChild("HealthBack")
+				.FindChild("healthTaken")
 				.GetComponent<Image>();
 
 			energyBarBk = transform
@@ -84,6 +103,7 @@ namespace GameProject {
 				.GetComponent<Image>();
 
 			healthToBarWidth = MAX_BAR_WIDTH * 2f;
+			
 		}
 
 		// Update is called once per frame
@@ -95,24 +115,20 @@ namespace GameProject {
 				float maxHealth = healthStatus.GetMaxHealthStatus();
 				float maxEnergy = energyStatus.GetMaxEnergyStatus();
 
-				if (health < lastCurrentHealthStatus) {
-					lastHealthBarStatus = lastCurrentHealthStatus;
-					lastCurrentHealthStatus = health;
-				} else {
-					lastCurrentHealthStatus = health;
-				}
-
 				if (maxHealth >= healthToBarWidth) {
 					sizedVector = new Vector2(MAX_BAR_WIDTH, MAX_BAR_HEIGHT);
 				} else {
 					sizedVector = new Vector2((maxHealth * MAX_BAR_WIDTH_REDUCTION), MAX_BAR_HEIGHT);
 				}
 
-				healthBarBk.rectTransform.sizeDelta =     Vector3.Lerp(healthBarBk.rectTransform.sizeDelta
-					, sizedVector, 
+				healthBarBk.rectTransform.sizeDelta =     Vector3.Lerp(healthBarBk.rectTransform.sizeDelta, 
+					sizedVector, 
 					Time.deltaTime);
 				healthBarStatus.rectTransform.sizeDelta = Vector3.Lerp(healthBarStatus.rectTransform.sizeDelta, 
 					sizedVector, 
+					Time.deltaTime);
+				healthBarTaken.rectTransform.sizeDelta = Vector3.Lerp(healthBarTaken.rectTransform.sizeDelta,
+					sizedVector,
 					Time.deltaTime);
 				energyBarBk.rectTransform.sizeDelta =     Vector3.Lerp(energyBarBk.rectTransform.sizeDelta, 
 					sizedVector, 
@@ -122,6 +138,7 @@ namespace GameProject {
 					Time.deltaTime);
 
 				healthBarStatus.fillAmount = health / maxHealth;
+				healthBarTaken.fillAmount = Mathf.Lerp(healthBarTaken.fillAmount, healthBarStatus.fillAmount, Time.deltaTime);
 				energyBarStatus.fillAmount = energy / maxEnergy;
 
 				Vector3 pos = Camera.main.WorldToScreenPoint(target.position);
