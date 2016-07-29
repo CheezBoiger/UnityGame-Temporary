@@ -13,7 +13,6 @@ namespace GameProject {
 		private const float MAX_BAR_WIDTH = 128.0f;
 
 		private float healthToBarWidth;
-		private float energyToBarWidth;
 		/// <summary>
 		/// The distance of the canvas above the game object.
 		/// </summary>
@@ -111,7 +110,7 @@ namespace GameProject {
 
 				healthBarBk.rectTransform.position = new Vector3(pos.x, pos.y + distanceAbove, pos.z);
 				healthBarStatus.rectTransform.position = healthBarBk.rectTransform.position;
-
+				
 				energyBarBk.rectTransform.position = new Vector3(healthBarBk.rectTransform.position.x, 
 					healthBarBk.rectTransform.position.y - distanceBetweenBars, 
 					healthBarBk.rectTransform.position.z);
