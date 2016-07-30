@@ -4,19 +4,32 @@ using System;
 
 namespace GameProject {
 	public class Sword : Item {
-			bool done = false;
+		public float damagebonus = 10000f;
+		private Actor owner;
 		// Use this for initialization
 		public override void Start() {
+			owner = GetComponent<Actor>();
 		}
 
 		// Update is called once per frame
 		public override void Update() {
 			if (Input.GetKeyDown(KeyCode.Y)) {
 				CameraFixed c = Camera.main.GetComponent<CameraFixed>();
-				c.setNewTransform(transform);
+				c.SetNewTransform(transform);
 				c.StartTransition(2.5f);
-				done = true;
 			}
+		}
+
+		public override void injectEffects() {
+			
+		}
+
+		public override void obtainCommonEffect() {
+			
+		}
+
+		public void SetOwner(Actor actor) {
+			owner = actor;
 		}
 	}
 }
