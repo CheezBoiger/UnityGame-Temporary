@@ -21,6 +21,13 @@ namespace GameProject {
 		MORPH,
 		SUMMON,
 		INVULNERABILITY,
+		FIRE,
+		COLD,
+		POISON,
+		SHOCK,
+		FLATTEN,
+		VORTEX,
+		INVISIBILITY,
 	}
 
 
@@ -31,5 +38,14 @@ namespace GameProject {
 	public abstract class Ability : Entity {
 		private float damage;
 		private float mod;
+		private HashSet<SpellEffect> spellEffects;
+
+		public override void Start() {
+
+		}
+
+		public override void Update() {
+			
+		}
 	}
 }
