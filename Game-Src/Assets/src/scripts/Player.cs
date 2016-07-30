@@ -18,7 +18,7 @@ namespace GameProject {
 			}
 
 			UIBarStatus s = g.GetComponent<UIBarStatus>();
-			s.target = transform;
+			s.target = this.transform;
 		}
 
 		// Update is called once per frame
@@ -32,8 +32,8 @@ namespace GameProject {
 				c.StartTransition(2.5f);
 				c.SetZoomOutRate(6.6f);
 				c.SetToShakeCamera(1f, 1f, 1f);
-				health.AppendMaxHealthByPercentage(2.5f);
-				//health.ReceiveDamage(1500.0f);
+				//health.AppendMaxHealthByPercentage(2.5f);
+				health.ReceiveDamage(1500.0f);
 			}
 
 			// Listen to key press to pick up item
