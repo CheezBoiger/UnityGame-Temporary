@@ -10,8 +10,11 @@ namespace GameProject {
 		NOTHING,
 		STUNNED,
 		POISONED,
+		FREEZING,
 		FROZEN,
 		BURNING,
+		ONFIRE,
+		ELECTRIFIED,
 		SHOCKED,
 		BLEEDING,
 		ENSTRANGLED,
@@ -39,30 +42,11 @@ namespace GameProject {
 	/// </summary>
 	public abstract class Actor : ActionObject {
 		#region Private Attributes
-		private float movementRate;
 
-		/// <summary>
-		/// Base health marks the base at which an ActionObject will define the default health.
-		/// This is strictly based on whether or not our items may not need it, but if we defined a basic
-		/// Actor, they will need a base health, to see if they have any health boosts and whatnot.
-		/// </summary>
-		private float baseHealth;
-		/// <summary>
-		/// The maximum health that our ActionObject currently has, so as to keep track of it during combat.
-		/// </summary>
-		private float maxHealth;
-		/// <summary>
-		/// Current health status of the ActionObject.
-		/// </summary>
-		private float health;
-		/// <summary>
-		/// Maximum energy that this ActionObject will have.
-		/// </summary>
-		private float maxEnergy;
-		/// <summary>
-		/// Current energy that the actor has.
-		/// </summary>
-		private float energy;
+		protected Health health;
+		protected Energy energy;
+		protected CameraFixed followingCamera;
+		protected Movement movement;
 
 		/// <summary>
 		/// Current buffs on the actor, which will affect his/her gameplay.
@@ -81,54 +65,6 @@ namespace GameProject {
 		#endregion
 
 		#region Getters and Setters
-
-		public float MaxEnergy {
-			get {
-				return maxEnergy;
-			} set {
-				maxEnergy = MaxEnergy;
-			}
-		}
-
-		public float BaseHealth {
-			get { 
-				return baseHealth;
-			} set {
-				baseHealth = BaseHealth;
-			}
-		}
-
-		public float MaxHealth {
-			get { 
-				return maxHealth;
-			} set {
-				maxHealth = MaxHealth;
-			} 
-		}
-
-		public float Health {
-			get {
-				return health;
-			} set {
-				health = Health;
-			}
-		}
-
-		public float Energy {
-			get {
-				return energy;
-			} set {
-				energy = Energy;
-			}
-		}
-
-		public float MovementRate {
-			get {
-				return movementRate;
-			} set {
-				movementRate = MovementRate;
-			}
-		}
 
 		public Item WalkedOverItem {
 			get {

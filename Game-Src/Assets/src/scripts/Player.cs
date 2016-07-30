@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using GameProject.Resources;
 
 namespace GameProject {
 	/*
@@ -9,7 +8,17 @@ namespace GameProject {
 	 */
 	public sealed class Player : Actor {
 		public override void Start() {
-			MovementRate = 10;
+			health = GetComponent<Health>();
+			energy = GetComponent<Energy>();
+			followingCamera = GetComponent<CameraFixed>();
+			movement = GetComponent<MovementController>();
+			GameObject g = (GameObject)Instantiate(UnityEngine.Resources.Load("UIBar"));
+			if (!g) {
+				Debug.Log("NOPE DIDNT WORK");
+			}
+
+			UIBarStatus s = g.GetComponent<UIBarStatus>();
+			s.target = transform;
 		}
 
 		// Update is called once per frame
@@ -17,12 +26,27 @@ namespace GameProject {
 			Debug.Log("Object is moving!");
 			Vector3 pos = this.transform.position;
 
+			if (Input.GetKeyDown(KeyCode.K)) {
+				CameraFixed c = Camera.main.GetComponent<CameraFixed>();
+				c.SetNewTransform(transform);
+				c.StartTransition(2.5f);
+				c.SetZoomOutRate(6.6f);
+				c.SetToShakeCamera(1f, 1f, 1f);
+				health.AppendMaxHealthByPercentage(2.5f);
+				//health.ReceiveDamage(1500.0f);
+			}
+
 			// Listen to key press to pick up item
 			if (Input.GetKeyDown(KeyCode.E)) {
+				health.ResetMaxHealth();
 				if (WalkedOverItem) {
 					Destroy(WalkedOverItem.gameObject);
 					// TODO: Equipt the item to the player
 				}
+			}
+
+			if (Input.GetKeyDown(KeyCode.H)) {
+				health.Revive();
 			}
 
 			// Listen to key press to throw item
@@ -50,9 +74,6 @@ namespace GameProject {
 		public void OnCollisionStay2D(Collision2D coll) {
 			Actor enemy = coll.gameObject.GetComponent<Actor>();
 			Debug.Log("I am collided!!");
-			if (coll.gameObject.tag.CompareTo(GameTags.Enemy) == 0) {
-				Debug.Log("Enemy is touching me!!");
-			}
 		}
 	}
 } // GameProject namespace
