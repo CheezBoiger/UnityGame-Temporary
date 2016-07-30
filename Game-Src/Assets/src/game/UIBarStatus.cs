@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace GameProject {
 	/// <summary>
 	/// UIBarStatus is a Script containing the Algorithm of displaying the health bar, and
-	/// energy bar, above a 3D object, and porting it over to the 2D camera UI.
+	/// energy bar, above a 3D object, and projecting it over to the 2D camera UI.
 	/// </summary>
 	public class UIBarStatus : MonoBehaviour {
 		private const float MAX_BAR_HEIGHT = 4f;
@@ -138,7 +138,7 @@ namespace GameProject {
 					Time.deltaTime);
 
 				healthBarStatus.fillAmount = health / maxHealth;
-				healthBarTaken.fillAmount = Mathf.Lerp(healthBarTaken.fillAmount, healthBarStatus.fillAmount, Time.deltaTime);
+				healthBarTaken.fillAmount = Mathf.Lerp(healthBarTaken.fillAmount, healthBarStatus.fillAmount, Time.deltaTime * 2f);
 				energyBarStatus.fillAmount = energy / maxEnergy;
 
 				Vector3 pos = Camera.main.WorldToScreenPoint(target.position);

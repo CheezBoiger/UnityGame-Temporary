@@ -10,7 +10,7 @@ namespace GameProject {
 	public class MovementController : Movement {
 
 		private float duration = 1f;
-		public float increasing = 0.01f;
+		public float increasing = 0.001f;
 		private float decreaseFactor = 1f;
 		#region Getters and Setters
 		public float MovementRate {

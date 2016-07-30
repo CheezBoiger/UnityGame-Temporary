@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace GameProject {
 	/// <summary>
 	/// Health is an ADT, designed to handle methods of modifying, reducing, and 
 	/// keeping track of the Object's health.
 	/// </summary>
-	public class Health : MonoBehaviour {
+	public abstract class Health : MonoBehaviour {
 		/// <summary>
 		/// Base health of any Actor, or object. Not modified by anything.
 		/// This is the naked bare minimum health, without modifications.
@@ -19,12 +20,12 @@ namespace GameProject {
 		/// <summary>
 		/// Current max Health of the Actor, or Object.
 		/// </summary>
-		private float maxHealth;
+		protected float maxHealth;
 		/// <summary>
 		/// Max Health Status will be the current status of the maximum
 		/// health, so as to not tinker with the original max health.
 		/// </summary>
-		private float maxHealthStatus;
+		protected float maxHealthStatus;
 		/// <summary>
 		/// Current health regeneration rate (hp per sec).
 		/// </summary>
@@ -33,19 +34,19 @@ namespace GameProject {
 		/// Max health regeneration rate, to keep track in case items reduce, or 
 		/// increase, the rate.
 		/// </summary>
-		private float maxHealthRegenRate;
+		protected float maxHealthRegenRate;
 		/// <summary>
 		/// 
 		/// </summary>
-		private float maxHealthRegenRateStatus;
+		protected float maxHealthRegenRateStatus;
 		/// <summary>
 		/// Is the Actor, or Object, still alive?
 		/// </summary>
-		private bool isAlive;
+		protected bool isAlive;
 		/// <summary>
 		/// 
 		/// </summary>
-		private bool damaged;
+		protected bool damaged;
 
 		#region Getters and Setters
 
@@ -63,8 +64,7 @@ namespace GameProject {
 		/// <summary>
 		/// Called once!!
 		/// </summary>
-		public void Start() {
-
+		public virtual void Start() {
 			maxHealth = baseHealth;
 			maxHealthStatus = maxHealth;
 
@@ -78,15 +78,13 @@ namespace GameProject {
 
 			maxHealthRegenRate = healthRegenRate;
 			maxHealthRegenRateStatus = maxHealthRegenRate;
-
-			damaged = false;
 		}
 		
 		
 		/// <summary>
 		/// Called once per frame!!
 		/// </summary>
-		public void Update() {
+		public virtual void Update() {
 
 			//Vector3 wantedPos = Camera.main.WorldToViewportPoint(transform.position);
 			//transform.position = wantedPos;
@@ -104,24 +102,36 @@ namespace GameProject {
 				isAlive = false;
 			}
 
-			if (damaged) {
-
-			} else {
-
-			}
 		}
 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public float GetHealth() {
 			return currentHealth;
 		}
 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public float GetMaxHealth() {
 			return maxHealth;
 		}
 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public float GetMaxHealthStatus() {
 			return maxHealthStatus;
 		}
+		
+		
 		/// <summary>
 		/// Appends the health. It is dynamic, which means you can either add health, 
 		/// or remove some. Checks if the health reaches at or below 0, to which the 
@@ -132,6 +142,7 @@ namespace GameProject {
 			currentHealth += health;
 
 			if(currentHealth <= 0) {
+				currentHealth = 0f;
 				isAlive = false;
 			} else {
 				isAlive = true;
@@ -219,11 +230,19 @@ namespace GameProject {
 		/// <param name="damage"></param>
 		public void ReceiveDamage(float damage) {
 			appendHealth(-damage);
-
-
+			
 			damaged = true;
 		}
-		
+
+
+		/// <summary>
+		/// Check if this game object is "dead"
+		/// </summary>
+		/// <returns></returns>
+		public bool IsDead() {
+			return (!isAlive);
+		}
+
 		
 		/// <summary>
 		/// Recieve health from unknown sources. Needed so that we can add effects to
