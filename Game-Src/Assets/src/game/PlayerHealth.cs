@@ -3,6 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 namespace GameProject {
+	/// <summary>
+	/// Player Health script. This scipt will add the effect and such for the 
+	/// Camera UI.
+	/// </summary>
 	public class PlayerHealth : Health {
 
 		public Image imageDamage;

@@ -6,7 +6,7 @@ namespace GameProject {
 	/// Energy ADT used to handle methods of modifying, reducing, and keeping track of the 
 	/// Object's health.
 	/// </summary>
-	public class Energy : MonoBehaviour {
+	public abstract class Energy : MonoBehaviour {
 		/// <summary>
 		/// Base Energy of any Actor, or object.
 		/// </summary>
@@ -22,7 +22,7 @@ namespace GameProject {
 		/// <summary>
 		/// 
 		/// </summary>
-		private float maxEnergyStatus;
+		protected float maxEnergyStatus;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -34,19 +34,19 @@ namespace GameProject {
 		/// <summary>
 		/// 
 		/// </summary>
-		private float maxEnergyRegenRateStatus;
+		protected float maxEnergyRegenRateStatus;
 		/// <summary>
 		/// 
 		/// </summary>
-		private bool energyDepleted;
+		protected bool energyDepleted;
 		/// <summary>
 		/// 
 		/// </summary>
-		private bool usedEnergy;
+		protected bool usedEnergy;
 
 		
 		// Use this for initialization
-		void Start() {
+		public virtual void Start() {
 			maxEnergy = baseEnergy;
 			maxEnergyStatus = maxEnergy;
 
@@ -66,7 +66,7 @@ namespace GameProject {
 
 		
 		// Update is called once per frame
-		void Update() {
+		public virtual void Update() {
 			if (((currentEnergy < maxEnergyStatus) ||
 				(energyRegenRate < 0) && !energyDepleted)) {
 				currentEnergy += Time.deltaTime * energyRegenRate;
@@ -84,11 +84,19 @@ namespace GameProject {
 		}
 
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public float GetCurrentEnergy() {
 			return currentEnergy;
 		}
 
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public float GetMaxEnergyStatus() {
 			return maxEnergyStatus;
 		}
