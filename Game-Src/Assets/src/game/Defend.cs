@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Defend : MonoBehaviour {
+public abstract class Defend : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

@@ -36,16 +36,16 @@ namespace GameProject {
 	/// will be given special actions so as to make the game much more unique in terms of the behaviour of our Actors.
 	/// </summary>
 	public abstract class Ability : Entity {
-		private float damage;
-		private float mod;
-		private HashSet<SpellEffect> spellEffects;
+		protected HashSet<SpellEffect> spellEffects;
 
-		public override void Start() {
+		public override abstract void Start();
 
-		}
+		public override abstract void Update();
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual void InjectSpellEffects() {
 
-		public override void Update() {
-			
 		}
 	}
 }

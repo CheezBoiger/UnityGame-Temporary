@@ -2,25 +2,50 @@
 using System.Collections;
 
 namespace GameProject {
-
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Damage : MonoBehaviour {
-		private Item itemOnHand;
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public float baseDamage;
-
+		/// <summary>
+		/// 
+		/// </summary>
 		private float maxDamage;
+		/// <summary>
+		/// 
+		/// </summary>
 		private float maxDamageStatus;
+		/// <summary>
+		/// 
+		/// </summary>
 		private float currentDamage;
+		/// <summary>
+		/// 
+		/// </summary>
 
 		// Use this for initialization
-		void Start() {
-			if (itemOnHand) {
-			}
+		public virtual void Start() {
+			maxDamage = baseDamage;
+
+			currentDamage = maxDamage;
+			maxDamageStatus = maxDamage;
 		}
 
 		// Update is called once per frame
-		void Update() {
+		public virtual void Update() {
 
+		}
+
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public float GetCurrentDamage() {
+			return currentDamage;
 		}
 	}
 }
