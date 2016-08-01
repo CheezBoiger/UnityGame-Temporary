@@ -19,7 +19,7 @@ namespace GameProject {
 			}
 
 			UIBarStatus s = g.GetComponent<UIBarStatus>();
-			s.target = transform;
+			s.target = this.transform;
 		}
 
 		// Update is called once per frame
