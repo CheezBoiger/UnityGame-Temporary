@@ -11,6 +11,8 @@ namespace GameProject {
 		COLD,
 		ELECTRIC,
 		POSION,
+		CORRUPT,
+		PURE,
 	}
 
 	public enum ItemType {
@@ -29,26 +31,20 @@ namespace GameProject {
 	 */
 	public abstract class Item : ActionObject {
 		private ItemType typeOfItem;
-
-		private float healthMod;
-		private float energyMod;
-		private float movementSpeedMod;
-		private float damageMod;
-		private float itemDamage;
 		/*
 		 * We should have only one ability per item, since it would be hectic to see too many
 		 * abilities on one item.
 		 */
 		private Ability distinctAbility;
 		/*
-		 * Certain spells give certain buffs, debuffs, and 
+		 * Certain spells give certain buffs, debuffs.
 		 */
 		private HashSet<Spell> spells = new HashSet<Spell>();
 
 		public abstract override void Start();
 		public abstract override void Update();
 
-		public abstract void injectEffects();
-		public abstract void obtainCommonEffect();
+		public abstract void injectEffects(ActionObject obj);
+		public abstract void obtainCommonEffect(ActionObject obj);
 	}
 } // namespace GameProject

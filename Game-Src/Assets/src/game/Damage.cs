@@ -25,6 +25,7 @@ namespace GameProject {
 		/// <summary>
 		/// 
 		/// </summary>
+		private DamageType damageType;
 
 		// Use this for initialization
 		public virtual void Start() {
@@ -46,6 +47,20 @@ namespace GameProject {
 		/// <returns></returns>
 		public float GetCurrentDamage() {
 			return currentDamage;
+		}
+
+
+		public float GetMaxDamange() {
+			return maxDamageStatus;
+		}
+
+		public void ResetMaxDamage() {
+			maxDamageStatus = maxDamage;
+		}
+
+		public void ResetAllDamage() {
+			ResetMaxDamage();
+			currentDamage = maxDamageStatus;
 		}
 	}
 }

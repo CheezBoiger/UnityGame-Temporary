@@ -12,6 +12,7 @@ namespace GameProject {
 			energy = GetComponent<Energy>();
 			followingCamera = GetComponent<CameraFixed>();
 			movement = GetComponent<MovementController>();
+
 			GameObject g = (GameObject)Instantiate(UnityEngine.Resources.Load("UIBar"));
 			if (!g) {
 				Debug.Log("NOPE DIDNT WORK");
@@ -32,8 +33,8 @@ namespace GameProject {
 				c.StartTransition(2.5f);
 				c.SetZoomOutRate(6.6f);
 				c.SetToShakeCamera(1f, 1f, 1f);
-				health.AppendMaxHealthByPercentage(2.5f);
-				//health.ReceiveDamage(1500.0f);
+				//health.AppendMaxHealthByPercentage(2.5f);
+				health.ReceiveDamage(1500.0f);
 			}
 
 			// Listen to key press to pick up item

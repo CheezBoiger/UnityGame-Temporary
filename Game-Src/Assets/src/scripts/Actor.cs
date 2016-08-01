@@ -49,15 +49,6 @@ namespace GameProject {
 		protected Movement movement;
 
 		/// <summary>
-		/// Current buffs on the actor, which will affect his/her gameplay.
-		/// </summary>
-		private HashSet<SpellEffect> currentBuffs;
-		/// <summary>
-		/// Current debuffs on the actor, which will cause trouble on their gameplay.
-		/// </summary>
-		private HashSet<SpellEffect> currentDebuffs;
-
-		/// <summary>
 		/// The item the actor is stepping on.
 		/// </summary>
 		private Item walkedOverItem;

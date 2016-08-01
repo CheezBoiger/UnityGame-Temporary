@@ -22,11 +22,6 @@ namespace GameProject {
 	/// writing our enemies, items, walls, breakables, crates, etc...
 	/// </summary>
 	public abstract class Entity : MonoBehaviour {
-		protected float xPos;
-		protected float yPos;
-		// Maybe 3D vectors needed.
-		protected float zPos;
-
 		protected ObjectType objectType;
 		protected bool invulnerable;
 		/// <summary>
@@ -36,9 +31,6 @@ namespace GameProject {
 		
 
 		public Entity() {
-			xPos = this.transform.position.x;
-			yPos = this.transform.position.y;
-			zPos = this.transform.position.z;
 			invulnerable = true;
 			objectType = ObjectType.UNKNOWN;
 			slowedDown = false;

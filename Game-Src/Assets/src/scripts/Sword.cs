@@ -20,11 +20,11 @@ namespace GameProject {
 			}
 		}
 
-		public override void injectEffects() {
+		public override void injectEffects(ActionObject obj) {
 			
 		}
 
-		public override void obtainCommonEffect() {
+		public override void obtainCommonEffect(ActionObject obj) {
 			
 		}
 

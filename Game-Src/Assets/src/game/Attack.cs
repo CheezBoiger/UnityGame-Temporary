@@ -3,8 +3,9 @@ using System.Collections;
 
 namespace GameProject {
 	/// <summary>
-	/// Attack is a script intended for use on Weapons, not Actors.
+	/// Attack is a script intended for use on Weapons, not Actors. 
 	/// </summary>
+	[System.Obsolete]
 	public class Attack : MonoBehaviour {
 		/// <summary>
 		/// This will have to change to Weapon (inherited by Item).
@@ -17,7 +18,7 @@ namespace GameProject {
 		/// <summary>
 		/// how long the Component is attacking.
 		/// </summary>
-		private float attackTimer = 1.0f;
+		private float attackTimer = 0.5f;
 
 		public float currentTimer = 0.0f;
 
@@ -45,6 +46,9 @@ namespace GameProject {
 		}
 
 
+		/// <summary>
+		/// Start the attack.
+		/// </summary>
 		public void DealAttack() {
 			isAttacking = true;
 			currentTimer = 0.0f;
