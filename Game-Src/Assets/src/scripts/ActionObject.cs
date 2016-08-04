@@ -10,7 +10,7 @@ namespace GameProject {
 		/// <summary>
 		/// Current buffs on the actor, which will affect his/her gameplay.
 		/// </summary>
-		protected HashSet<SpellEffect> currentBuffs;
+		protected List<SpellEffect> currentBuffs;
 		/// <summary>
 		/// Current debuffs on the actor, which will cause trouble on their gameplay.
 		/// </summary>
@@ -21,7 +21,6 @@ namespace GameProject {
 
 
 		public virtual void injectSpells() {
-
 		}
 	}
 } // namespace GameProject

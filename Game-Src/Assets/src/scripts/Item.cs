@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 
 namespace GameProject {
-	/*
-	 * DamageType is an enum record, allowing the variety of damage types in the game.
-	 */
-	public enum DamageType {
-		NORMAL,
-		FIRE,
-		COLD,
-		ELECTRIC,
-		POSION,
-		CORRUPT,
-		PURE,
-	}
-
 	public enum ItemType {
 		MELEE,
 		RANGED,
@@ -36,9 +23,10 @@ namespace GameProject {
 		 * abilities on one item.
 		 */
 		private Ability distinctAbility;
-		/*
-		 * Certain spells give certain buffs, debuffs.
-		 */
+		/// <summary>
+		/// Spells that come with the item, they are added to the Actor or ActionObject while
+		/// they have them equipped or used.
+		/// </summary>
 		private HashSet<Spell> spells = new HashSet<Spell>();
 
 		public abstract override void Start();

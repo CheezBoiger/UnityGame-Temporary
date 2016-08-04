@@ -8,7 +8,7 @@ namespace GameProject {
 		/// Damage done by Weapon itself (This does not include the spell effects included in
 		/// this object
 		/// </summary>
-		protected Damage damage;
+		protected DamageContainer damageC; 
 		/// <summary>
 		/// The spell effects that are included in the weapon.
 		/// </summary>
@@ -17,7 +17,8 @@ namespace GameProject {
 		/// Check if weapon is attacking.
 		/// </summary>
 		private bool isAttacking = false;
-
+		private float timer;
+		
 		public override void injectEffects(ActionObject obj) {
 
 		}
@@ -33,6 +34,14 @@ namespace GameProject {
 
 		// Update is called once per frame
 		public override void Update() {
+
+		}
+
+		public void AddDamage(Damage damage) {
+			damage.addtoDamageContainer(damageC);
+		}
+
+		public void OnCollisionEnter(Collision col) {
 
 		}
 	}

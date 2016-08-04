@@ -157,7 +157,7 @@ LensFlare:
   m_Enabled: 1
   m_Flare: {fileID: 12100000, guid: eb7f2fdf6cf18496a8300de97efb5eac, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_Brightness: 1
+  m_Brightness: 0.7
   m_FadeSpeed: 3
   m_IgnoreLayers:
     serializedVersion: 2
@@ -690,7 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 927592906}
-  distance: 10
+  distance: 20
   transitionDuration: 2.5
 --- !u!81 &2098745602
 AudioListener:

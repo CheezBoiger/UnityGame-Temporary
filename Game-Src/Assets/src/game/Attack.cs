@@ -4,13 +4,14 @@ using System.Collections;
 namespace GameProject {
 	/// <summary>
 	/// Attack is a script intended for use on Weapons, not Actors. 
+	/// Obsolete, do not use!!
 	/// </summary>
 	[System.Obsolete]
 	public class Attack : MonoBehaviour {
 		/// <summary>
 		/// This will have to change to Weapon (inherited by Item).
 		/// </summary>
-		private Damage ownerDamage;
+		private DamageContainer ownerDamage;
 		/// <summary>
 		/// Check if player is attacking.
 		/// </summary>
@@ -25,7 +26,7 @@ namespace GameProject {
 		// Use this for initialization
 		public virtual void Start() {
 			isAttacking = false;
-			ownerDamage = GetComponent<Damage>();
+			ownerDamage = GetComponent<DamageContainer>();
 		}
 
 
@@ -66,7 +67,7 @@ namespace GameProject {
 					Health health = actor.GetComponent<Health>();
 					if (ownerDamage != null) {
 						// Do damage with Weapon!
-						health.ReceiveDamage(ownerDamage.GetCurrentDamage());
+						health.ReceiveDamage(3f);
 					}
 				}
 			}

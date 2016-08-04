@@ -2,65 +2,41 @@
 using System.Collections;
 
 namespace GameProject {
-	/// <summary>
-	/// 
-	/// </summary>
+		/*
+	 * DamageType is an enum record, allowing the variety of damage types in the game.
+	 */
+	public enum DamageType {
+		NORMAL,
+		CORRUPT,
+		PURE, // not reduced by resistance
+	}
+
+
+	public enum ElementalType {
+		NONE,
+		COLD,
+		FIRE,
+		ELECTRIC,
+		POISON,
+	}
+
+
 	public class Damage : MonoBehaviour {
-		/// <summary>
-		/// 
-		/// </summary>
-		public float baseDamage;
-		/// <summary>
-		/// 
-		/// </summary>
-		private float maxDamage;
-		/// <summary>
-		/// 
-		/// </summary>
-		private float maxDamageStatus;
-		/// <summary>
-		/// 
-		/// </summary>
-		private float currentDamage;
-		/// <summary>
-		/// 
-		/// </summary>
-		private DamageType damageType;
+		public float normalDamage;
+		public ElementalType element;
+		public DamageType type;
 
 		// Use this for initialization
-		public virtual void Start() {
-			maxDamage = baseDamage;
-
-			currentDamage = maxDamage;
-			maxDamageStatus = maxDamage;
+		void Start() {
 		}
 
 		// Update is called once per frame
-		public virtual void Update() {
+		void Update() {
 
 		}
 
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public float GetCurrentDamage() {
-			return currentDamage;
-		}
+		public void addtoDamageContainer(DamageContainer container) {
 
-
-		public float GetMaxDamange() {
-			return maxDamageStatus;
-		}
-
-		public void ResetMaxDamage() {
-			maxDamageStatus = maxDamage;
-		}
-
-		public void ResetAllDamage() {
-			ResetMaxDamage();
-			currentDamage = maxDamageStatus;
 		}
 	}
 }

@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
+namespace Proj {
+	
+}
+
 namespace GameProject {
 	/// <summary>
 	/// UIBarStatus is a Script containing the Algorithm of displaying the health bar, and
@@ -11,8 +15,8 @@ namespace GameProject {
 		private const float MAX_BAR_HEIGHT = 4f;
 		private const float MAX_BAR_WIDTH_REDUCTION = 0.5f;
 		private const float MAX_BAR_WIDTH = 128.0f;
-
 		private float healthToBarWidth;
+
 		/// <summary>
 		/// The distance of the canvas above the game object.
 		/// </summary>
@@ -70,6 +74,7 @@ namespace GameProject {
 		/// Incorporate just in case we are dealing with multiplayer sessions.
 		/// </summary>
 		public bool showEnergyBar = false;
+		//DamageType test = DamageType.COLD;
 
 		// Use this for initialization
 		void Start() {
@@ -185,7 +190,7 @@ namespace GameProject {
 		}
 
 		public void SendDamageToHealthBar(float damage) {
-
+			
 		}
 
 		public void SentHealToHealthBar(float heal) {

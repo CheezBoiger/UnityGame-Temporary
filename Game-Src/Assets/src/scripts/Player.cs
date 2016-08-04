@@ -14,6 +14,7 @@ namespace GameProject {
 			movement = GetComponent<MovementController>();
 
 			GameObject g = (GameObject)Instantiate(UnityEngine.Resources.Load("UIBar"));
+
 			if (!g) {
 				Debug.Log("NOPE DIDNT WORK");
 			}

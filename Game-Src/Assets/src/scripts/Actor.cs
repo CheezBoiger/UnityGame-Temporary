@@ -27,12 +27,6 @@ namespace GameProject {
 		INVULNERABLE,
 	}
 
-	public class Resistance {
-		public string name;
-		public DamageType DamType;
-		public float resist;
-	}
-
 
 	/// <summary>
 	/// Actor is the movable object that we interact with, s/he will be controlled by the user,
@@ -47,6 +41,7 @@ namespace GameProject {
 		protected Energy energy;
 		protected CameraFixed followingCamera;
 		protected Movement movement;
+		protected Defense defense;
 
 		/// <summary>
 		/// The item the actor is stepping on.
@@ -82,10 +77,12 @@ namespace GameProject {
 		/// <summary>
 		/// Inject any SpellEffect objects that collided with the Actor.
 		/// </summary>
-		public virtual void InjectSpellEffects(HashSet<SpellEffect> effects) {
+		public virtual void InjectSpellEffects(HashSet<SpellEffect> effects) { 
+
 		}
 
 		public virtual void ReflectDamage(List<Actor> actors) {
+
 		}
 
 		/// <summary>
@@ -123,6 +120,10 @@ namespace GameProject {
 			if (result != null) {
 				walkedOverItem = null;
 			}
+		}
+
+		public void TransferDamage(Damage ga) {
+
 		}
 	}
 }
