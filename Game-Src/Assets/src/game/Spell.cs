@@ -13,12 +13,8 @@ namespace GameProject {
 	public abstract class Spell : Entity {
 		private string spellName;
 
-		private bool hasCooldown;
-
-		private float damage;
-		private float damageMod;
-
-		private int coolDownTimer;
+		protected bool hasCooldown;
+		protected int coolDownTimer;
 
 		private SpellType spellKind;
 	  
@@ -32,6 +28,11 @@ namespace GameProject {
 			} set {
 				spellKind = SpellKind;
 			}
+		}
+
+
+		public void InjectBuffs(ActionObject obj) {
+
 		}
 	}
 }

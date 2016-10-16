@@ -21,6 +21,13 @@ namespace GameProject {
 		MORPH,
 		SUMMON,
 		INVULNERABILITY,
+		FIRE,
+		COLD,
+		POISON,
+		SHOCK,
+		FLATTEN,
+		VORTEX,
+		INVISIBILITY,
 	}
 
 
@@ -28,8 +35,17 @@ namespace GameProject {
 	/// Ability marks the available actions that an Actor may be able to do. This means, An actor, such as an enemy, or the player,
 	/// will be given special actions so as to make the game much more unique in terms of the behaviour of our Actors.
 	/// </summary>
-	public abstract class Ability {
-		private float damage;
-		private float mod;
+	public abstract class Ability : Entity {
+		protected HashSet<SpellEffect> spellEffects;
+
+		public override abstract void Start();
+
+		public override abstract void Update();
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual void InjectSpellEffects() {
+
+		}
 	}
 }
