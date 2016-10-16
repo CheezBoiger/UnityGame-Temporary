@@ -341,6 +341,9 @@ GameObject:
   - 114: {fileID: 927592909}
   - 114: {fileID: 927592908}
   - 114: {fileID: 927592907}
+  - 114: {fileID: 927592917}
+  - 114: {fileID: 927592916}
+  - 114: {fileID: 927592915}
   m_Layer: 0
   m_Name: ThePlayer
   m_TagString: Untagged
@@ -482,6 +485,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 927592905}
   m_Mesh: {fileID: 4300006, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+--- !u!114 &927592915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927592905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960e3b65bfcd75c42800c1698e7aa2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  elementDamage: 0
+  element: 0
+  type: 0
+--- !u!114 &927592916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927592905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e934381f58f8944a14d08a58cc02a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorDamage: {fileID: 0}
+  weaponDamage: {fileID: 0}
+--- !u!114 &927592917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927592905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a364241497f3d8f4ba21a011eabffb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1109462591
 GameObject:
   m_ObjectHideFlags: 0

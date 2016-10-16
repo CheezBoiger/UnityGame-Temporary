@@ -17,6 +17,9 @@ namespace GameProject {
 		/// Check if weapon is attacking.
 		/// </summary>
 		private bool isAttacking = false;
+		/// <summary>
+		/// 
+		/// </summary>
 		private float timer;
 		
 		public override void injectEffects(ActionObject obj) {
@@ -38,7 +41,6 @@ namespace GameProject {
 		}
 
 		public void AddDamage(Damage damage) {
-			damage.addtoDamageContainer(damageC);
 		}
 
 		public void OnCollisionEnter(Collision col) {

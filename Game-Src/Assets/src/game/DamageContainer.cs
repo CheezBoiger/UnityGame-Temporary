@@ -8,37 +8,44 @@ namespace GameProject {
 	/// <summary>
 	/// 
 	/// </summary>
-	public abstract class DamageContainer : MonoBehaviour {
-		private float normalDamage;
-		private float pureDamage;
-		private float corruptDamage;
-
+	public class DamageContainer : MonoBehaviour {
+		/// <summary>
+		/// Damage that actor does on his/her/its own!
+		/// </summary>
+		public Damage actorDamage;
+		/// <summary>
+		/// Weapon damage will specify the damage type!
+		/// This will prevent having to make the player a damage dealer as well.
+		/// </summary>
+		public Damage weaponDamage;
+		
+		/// <summary>
+		/// Weapons and armor can add damage to this. Temporary modifiers can also 
+		/// be added.
+		/// </summary>
 		private List<Damage> damages;
 
-		// Use this for initialization
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name=""></param>
+		/// <returns></returns>
 		public virtual void Start() {
-			Damage vanDam = new Damage();
-			vanDam.type = DamageType.NORMAL;
-			vanDam.normalDamage = 10f;
 
-			damages.Add(vanDam);
-			Damage pan = new Damage();
-			pan.type = DamageType.NORMAL;
-			pan.normalDamage = 4f;
-
-			damages.Add(pan);
-			/////////////////////////////
-			damages.Remove(pan);
 		}
 
 
-		// Update is called once per frame
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual void Update() {
 
 
 		}
 
-		public void AddDamage(Damage damge) {
+
+		public void AddDamage(Damage damage) {
 
 		}
 	}
